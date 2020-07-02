@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>Invoice lines</title>
+</head>
+<body>
+<div class="container">
+    <h3>Invoice lines</h3>
+    <hr>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>Track name</th>
+            <th>Unit price</th>
+            <th>Quantity</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="invoiceline : ${invoicelines}">
+            <td th:text="${invoiceline.track.name}"/>
+            <td th:text="${invoiceline.unitPrice}"/>
+            <td th:text="${invoiceline.quantity}"/>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
