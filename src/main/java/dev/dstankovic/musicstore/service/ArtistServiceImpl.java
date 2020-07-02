@@ -13,6 +13,7 @@ public class ArtistServiceImpl implements ArtistService {
     private ArtistRepository artistRepository;
 
     public ArtistServiceImpl(ArtistRepository artistRepository) {
+
         this.artistRepository = artistRepository;
     }
 
