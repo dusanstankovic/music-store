@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>List of Invoices</title>
+</head>
+<body>
+<div class="container">
+    <h3>List of Invoices</h3>
+    <hr>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>Customer</th>
+            <th>Invoice date</th>
+            <th>Billing address</th>
+            <th>Billing city</th>
+            <th>Billing State</th>
+            <th>Billing country</th>
+            <th>Billing postal code</th>
+            <th>Total</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="invoice : ${invoices}">
+            <td th:text="${invoice.customer.firstName + ' ' + invoice.customer.lastName}"/>
+            <td th:text="${invoice.invoiceDate}"/>
+            <td th:text="${invoice.billingAddress}"/>
+            <td th:text="${invoice.billingCity}"/>
+            <td th:text="${invoice.billingState}"/>
+            <td th:text="${invoice.billingCountry}"/>
+            <td th:text="${invoice.billingPostalCode}"/>
+            <td th:text="${invoice.total}"/>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
