@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>List of Customers</title>
+</head>
+<body>
+<div class="container">
+    <h3>List of Customers</h3>
+    <hr>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Company</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Country</th>
+            <th>Postal code</th>
+            <th>Phone</th>
+            <th>Fax</th>
+            <th>Email</th>
+            <th>Support rep</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="customer : ${customers}">
+            <td th:text="${customer.firstName}"/>
+            <td th:text="${customer.lastName}"/>
+            <td th:text="${customer.company}"/>
+            <td th:text="${customer.address}"/>
+            <td th:text="${customer.city}"/>
+            <td th:text="${customer.state}"/>
+            <td th:text="${customer.country}"/>
+            <td th:text="${customer.postalCode}"/>
+            <td th:text="${customer.phone}"/>
+            <td th:text="${customer.fax}"/>
+            <td th:text="${customer.email}"/>
+            <td th:text="${customer.employee.firstName + ' ' + customer.employee.lastName}"/>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
