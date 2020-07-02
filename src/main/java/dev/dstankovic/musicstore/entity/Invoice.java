@@ -18,7 +18,6 @@ public class Invoice {
     @JoinColumn(name = "CustomerId")
     private Customer customer;
 
-    @Temporal(TemporalType.DATE)
     @Column(name = "InvoiceDate", nullable = false)
     private LocalDate invoiceDate;
 

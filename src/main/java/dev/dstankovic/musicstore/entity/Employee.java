@@ -36,11 +36,9 @@ public class Employee {
             cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     private List<Customer> customers;
 
-    @Temporal(TemporalType.DATE)
     @Column(name = "BirthDate")
     private LocalDate birthDate;
 
-    @Temporal(TemporalType.DATE)
     @Column(name = "HireDate")
     private LocalDate hireDate;
 
