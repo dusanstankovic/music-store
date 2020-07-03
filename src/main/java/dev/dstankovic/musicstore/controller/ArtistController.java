@@ -1,5 +1,6 @@
 package dev.dstankovic.musicstore.controller;
 
+import dev.dstankovic.musicstore.entity.Artist;
 import dev.dstankovic.musicstore.service.ArtistService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,5 +24,14 @@ public class ArtistController {
         model.addAttribute("artists", artistService.findAll());
 
         return "/artists/list-artists";
+    }
+
+    @GetMapping("/addArtist")
+    public String addArtist(Model model) {
+
+        Artist artist = new Artist();
+        model.addAttribute("artist", artist);
+
+        return "/artists/artist-form";
     }
 }
