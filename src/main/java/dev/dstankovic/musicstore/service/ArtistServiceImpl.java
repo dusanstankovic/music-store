@@ -20,7 +20,7 @@ public class ArtistServiceImpl implements ArtistService {
     @Override
     public List<Artist> findAll() {
 
-        return artistRepository.findAll();
+        return artistRepository.findAllByOrderByNameAsc();
     }
 
     @Override
