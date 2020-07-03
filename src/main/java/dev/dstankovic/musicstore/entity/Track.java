@@ -16,7 +16,7 @@ public class Track {
     @Column(name = "Name", length = 200, nullable = false)
     private String name;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @ManyToOne
     @JoinColumn(name = "AlbumId")
     private Album album;
 
