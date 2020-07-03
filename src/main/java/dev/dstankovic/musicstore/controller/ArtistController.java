@@ -50,4 +50,12 @@ public class ArtistController {
 
         return "/artists/artist-form";
     }
+
+    @GetMapping("/delete")
+    public String delete(@RequestParam("artistId") int id) {
+
+        artistService.deleteById(id);
+
+        return "redirect:/artists/list";
+    }
 }
