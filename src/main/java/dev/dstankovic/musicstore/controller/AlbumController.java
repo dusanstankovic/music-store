@@ -6,10 +6,7 @@ import dev.dstankovic.musicstore.service.AlbumService;
 import dev.dstankovic.musicstore.service.ArtistService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,7 +30,7 @@ public class AlbumController {
         return "albums/list-albums";
     }
 
-    @GetMapping("addAlbum")
+    @GetMapping("/addAlbum")
     public String addAlbum(Model model) {
 
         Album album = new Album();
@@ -51,5 +48,17 @@ public class AlbumController {
         albumService.save(album);
 
         return "redirect:/albums/list";
+    }
+
+    @GetMapping("/updateAlbum")
+    public String updateAlbum(@RequestParam("albumId") int id, Model model) {
+
+        Album album = albumService.findById(id);
+        model.addAttribute("album", album);
+
+        List<Artist> artists = artistService.findAll();
+        model.addAttribute("artists", artists);
+
+        return "albums/album-form";
     }
 }

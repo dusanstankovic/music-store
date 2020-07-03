@@ -13,6 +13,10 @@
     <hr>
     <p class="h4 mb-4">Save Album</p>
     <form action="#" th:action="@{/albums/save}" th:object="${album}" method="post">
+
+        <!-- add hidden form field to handle update -->
+        <input type="hidden" th:field="*{id}" />
+
         <input type="text" th:field="*{title}" class="form-control mb-4 col-4" placeholder="Album title">
         <select th:field="${album.artist.id}" class="form-control mb-4 col-4">
             <option value="0">Select artist:</option>
