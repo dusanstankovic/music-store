@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface AlbumRepository extends JpaRepository<Album, Integer> {
 
-    // sort by Artist name
-    List<Album> findAllByOrderByArtistAsc();
+    // sort by Album name ascending
+    List<Album> findAllByOrderByTitleAsc();
 }

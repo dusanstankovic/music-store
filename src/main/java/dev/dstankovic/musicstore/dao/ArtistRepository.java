@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface ArtistRepository extends JpaRepository<Artist, Integer> {
 
+    // sort by Artist name ascending
     List<Artist> findAllByOrderByNameAsc();
 }
