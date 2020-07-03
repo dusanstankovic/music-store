@@ -22,6 +22,6 @@ public class AlbumController {
 
         model.addAttribute("albums", albumService.findAll());
 
-        return "list-albums";
+        return "albums/list-albums";
     }
 }
