@@ -61,4 +61,13 @@ public class AlbumController {
 
         return "albums/album-form";
     }
+
+    @GetMapping("/delete")
+    public String deleteAlbum(@RequestParam("albumId") int id) {
+
+        albumService.deleteById(id);
+
+        return "redirect:/albums/list";
+    }
+
 }
