@@ -16,7 +16,7 @@ public class Album {
     @Column(name = "Title", length = 160, nullable = false)
     private String title;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @ManyToOne
     @JoinColumn(name = "ArtistId")
     private Artist artist;
 

@@ -7,6 +7,8 @@ import dev.dstankovic.musicstore.service.ArtistService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -41,5 +43,13 @@ public class AlbumController {
         model.addAttribute("artists", artists);
 
         return "albums/album-form";
+    }
+
+    @PostMapping("/save")
+    public String saveAlbum(@ModelAttribute("album") Album album) {
+
+        albumService.save(album);
+
+        return "redirect:/albums/list";
     }
 }
