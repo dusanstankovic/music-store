@@ -22,6 +22,6 @@ public class EmployeeController {
 
         model.addAttribute("employees", employeeService.findAll());
 
-        return "list-employees";
+        return "/employees/list-employees";
     }
 }

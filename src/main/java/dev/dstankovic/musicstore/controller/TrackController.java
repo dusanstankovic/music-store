@@ -22,6 +22,6 @@ public class TrackController {
 
         model.addAttribute("tracks", trackService.findAll());
 
-        return "list-tracks";
+        return "/tracks/list-tracks";
     }
 }

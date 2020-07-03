@@ -22,6 +22,6 @@ public class CustomerController {
 
         model.addAttribute("customers", customerService.findAll());
 
-        return "list-customers";
+        return "/customers/list-customers";
     }
 }

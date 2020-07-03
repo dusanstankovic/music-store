@@ -22,6 +22,6 @@ public class PlaylistController {
 
         model.addAttribute("playlists", playlistService.findAll());
 
-        return "list-playlists";
+        return "/playlists/list-playlists";
     }
 }

@@ -22,6 +22,6 @@ public class ArtistController {
 
         model.addAttribute("artists", artistService.findAll());
 
-        return "list-artists";
+        return "/artists/list-artists";
     }
 }

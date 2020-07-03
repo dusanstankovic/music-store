@@ -22,12 +22,12 @@ public class AlbumController {
         this.artistService = artistService;
     }
 
-    @GetMapping("list")
+    @GetMapping("/list")
     public String listAlbums(Model model) {
 
         model.addAttribute("albums", albumService.findAll());
 
-        return "albums/list-albums";
+        return "/albums/list-albums";
     }
 
     @GetMapping("/addAlbum")
@@ -39,7 +39,7 @@ public class AlbumController {
         List<Artist> artists = artistService.findAll();
         model.addAttribute("artists", artists);
 
-        return "albums/album-form";
+        return "/albums/album-form";
     }
 
     @PostMapping("/save")
@@ -59,7 +59,7 @@ public class AlbumController {
         List<Artist> artists = artistService.findAll();
         model.addAttribute("artists", artists);
 
-        return "albums/album-form";
+        return "/albums/album-form";
     }
 
     @GetMapping("/delete")

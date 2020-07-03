@@ -22,6 +22,6 @@ public class GenreController {
 
         model.addAttribute("genres", genreService.findAll());
 
-        return "list-genres";
+        return "/genres/list-genres";
     }
 }

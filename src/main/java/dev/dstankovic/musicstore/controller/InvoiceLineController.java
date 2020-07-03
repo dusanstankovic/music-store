@@ -22,6 +22,6 @@ public class InvoiceLineController {
 
         model.addAttribute("invoicelines", invoiceLineService.findAll());
 
-        return "list-invoice-lines";
+        return "/invoicelines/list-invoice-lines";
     }
 }

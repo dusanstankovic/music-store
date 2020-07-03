@@ -22,6 +22,6 @@ public class MediaTypeController {
 
         model.addAttribute("mediatypes", mediaTypeService.findAll());
 
-        return "list-media-types";
+        return "/mediatypes/list-media-types";
     }
 }
