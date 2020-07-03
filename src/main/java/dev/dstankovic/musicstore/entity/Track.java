@@ -20,11 +20,11 @@ public class Track {
     @JoinColumn(name = "AlbumId")
     private Album album;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @ManyToOne
     @JoinColumn(name = "MediaTypeId")
     private MediaType mediaType;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @ManyToOne
     @JoinColumn(name = "GenreId")
     private Genre genre;
 

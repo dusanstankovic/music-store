@@ -15,7 +15,7 @@ public class InvoiceLine {
     @JoinColumn(name = "InvoiceId")
     private Invoice invoice;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @ManyToOne
     @JoinColumn(name = "TrackId")
     private Track track;
 
