@@ -23,6 +23,7 @@
             <th>Length (ms)</th>
             <th>Size (bytes)</th>
             <th>Unit price</th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
@@ -35,6 +36,14 @@
             <td th:text="${track.milliseconds}"/>
             <td th:text="${track.bytes}"/>
             <td th:text="${track.unitPrice}"/>
+            <td>
+                <!-- update button -->
+                <a th:href="@{/tracks/updateTrack(trackId=${track.id})}" class="btn btn-info btn-sm">Update</a>
+                <!-- delete button -->
+                <a th:href="@{/tracks/delete(trackId=${track.id})}"
+                   class="btn btn-danger btn-sm"
+                   onclick="if (!(confirm('Are you sure you want to delete this track?'))) return false;">Delete</a>
+            </td>
         </tr>
         </tbody>
     </table>

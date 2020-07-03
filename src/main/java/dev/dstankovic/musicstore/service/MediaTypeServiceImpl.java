@@ -20,7 +20,7 @@ public class MediaTypeServiceImpl implements MediaTypeService {
     @Override
     public List<MediaType> findAll() {
 
-        return mediaTypeRepository.findAll();
+        return mediaTypeRepository.findAllByOrderByNameAsc();
     }
 
     @Override

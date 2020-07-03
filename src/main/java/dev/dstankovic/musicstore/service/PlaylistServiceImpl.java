@@ -20,7 +20,7 @@ public class PlaylistServiceImpl implements PlaylistService {
     @Override
     public List<Playlist> findAll() {
 
-        return playlistRepository.findAll();
+        return playlistRepository.findAllByOrderByNameAsc();
     }
 
     @Override

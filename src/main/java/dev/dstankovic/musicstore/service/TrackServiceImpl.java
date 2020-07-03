@@ -20,7 +20,7 @@ public class TrackServiceImpl implements TrackService {
     @Override
     public List<Track> findAll() {
 
-        return trackRepository.findAll();
+        return trackRepository.findAllByOrderByNameAsc();
     }
 
     @Override

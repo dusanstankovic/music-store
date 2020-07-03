@@ -10,10 +10,7 @@ import dev.dstankovic.musicstore.service.MediaTypeService;
 import dev.dstankovic.musicstore.service.TrackService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -63,6 +60,32 @@ public class TrackController {
     public String save(@ModelAttribute("track") Track track) {
 
         trackService.save(track);
+
+        return "redirect:/tracks/list";
+    }
+
+    @GetMapping("/updateTrack")
+    public String updateTrack(@RequestParam("trackId") int id, Model model) {
+
+        Track track = trackService.findById(id);
+        model.addAttribute("track", track);
+
+        List<Genre> genres = genreService.findAll();
+        model.addAttribute("genres", genres);
+
+        List<MediaType> mediaTypes = mediaTypeService.findAll();
+        model.addAttribute("mediatypes", mediaTypes);
+
+        List<Album> albums = albumService.findAll();
+        model.addAttribute("albums", albums);
+
+        return "/tracks/track-form";
+    }
+
+    @GetMapping("/delete")
+    public String delete(@RequestParam("trackId") int id) {
+
+        trackService.deleteById(id);
 
         return "redirect:/tracks/list";
     }
