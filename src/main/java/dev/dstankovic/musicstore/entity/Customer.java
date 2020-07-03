@@ -54,7 +54,7 @@ public class Customer {
             cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     private List<Invoice> invoices;
 
-    protected Customer() {
+    public Customer() {
     }
 
     public Customer(String firstName,

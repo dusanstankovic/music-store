@@ -23,7 +23,7 @@ public class Playlist {
             inverseJoinColumns = @JoinColumn(name = "TrackId"))
     private List<Track> tracks;
 
-    protected Playlist() {
+    public Playlist() {
     }
 
     public Playlist(String name) {

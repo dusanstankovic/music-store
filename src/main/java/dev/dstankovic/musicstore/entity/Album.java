@@ -23,7 +23,7 @@ public class Album {
     @OneToMany(mappedBy = "album", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Track> tracks;
 
-    protected Album() {
+    public Album() {
     }
 
     public Album(String title) {

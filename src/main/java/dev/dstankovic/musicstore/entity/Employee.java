@@ -66,7 +66,7 @@ public class Employee {
     @Column(name = "Email", length = 60)
     private String email;
 
-    protected Employee() {
+    public Employee() {
     }
 
     public Employee(String lastName,

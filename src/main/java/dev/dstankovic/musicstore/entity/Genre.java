@@ -14,7 +14,7 @@ public class Genre {
     @Column(name = "Name", length = 120)
     private String name;
 
-    protected Genre() {
+    public Genre() {
     }
 
     public Genre(String name) {

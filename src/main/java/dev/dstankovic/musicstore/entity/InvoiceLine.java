@@ -25,7 +25,7 @@ public class InvoiceLine {
     @Column(name = "Quantity", nullable = false)
     private int quantity;
 
-    protected InvoiceLine() {
+    public InvoiceLine() {
     }
 
     public InvoiceLine(double unitPrice, int quantity) {

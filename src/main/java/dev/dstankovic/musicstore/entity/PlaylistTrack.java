@@ -14,7 +14,7 @@ public class PlaylistTrack {
     @Column(name = "TrackId", nullable = false)
     private int trackId;
 
-    protected PlaylistTrack() {
+    public PlaylistTrack() {
     }
 
     public PlaylistTrack(int trackId) {

@@ -51,7 +51,7 @@ public class Track {
             cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     private List<InvoiceLine> invoiceLines;
 
-    protected Track() {
+    public Track() {
     }
 
     public Track(String name, String composer, int milliseconds, int bytes, double unitPrice) {

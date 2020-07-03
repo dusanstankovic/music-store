@@ -42,7 +42,7 @@ public class Invoice {
     @OneToMany(mappedBy = "invoice", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     List<InvoiceLine> invoiceLines;
 
-    protected Invoice() {
+    public Invoice() {
     }
 
     public Invoice(LocalDate invoiceDate,

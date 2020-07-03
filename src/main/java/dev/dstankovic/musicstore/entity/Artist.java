@@ -19,7 +19,7 @@ public class Artist {
     @OneToMany(mappedBy = "artist", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Album> albums;
 
-    protected Artist() {
+    public Artist() {
     }
 
     public Artist(String name) {

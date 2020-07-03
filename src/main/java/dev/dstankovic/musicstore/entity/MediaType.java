@@ -14,7 +14,7 @@ public class MediaType {
     @Column(name = "Name", length = 120)
     private String name;
 
-    protected MediaType() {
+    public MediaType() {
     }
 
     public MediaType(String name) {
