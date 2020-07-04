@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>Add Invoice</title>
+</head>
+<body>
+<div class="container">
+    <h3>Invoice details</h3>
+    <hr>
+    <p class="h4 mb-4">Save Invoice</p>
+    <form action="#" th:action="@{/invoices/save}" th:object="${invoice}" method="post">
+
+        <!-- add hidden form field to handle update -->
+        <input type="hidden" th:field="*{id}" />
+
+        <select th:field="${invoice.customer.id}" class="form-control mb-4 col-4">
+            <option value="0">Select customer:</option>
+            <option th:each="customer : ${customers}" th:value="${customer.id}"
+                    th:text="${customer.firstName + ' ' + customer.lastName}">Customer</option>
+        </select>
+        <input type="text" th:field="*{invoiceDate}" class="form-control mb-4 col-4" placeholder="Invoice Date">
+        <input type="text" th:field="*{billingAddress}" class="form-control mb-4 col-4" placeholder="Billing Address">
+        <input type="text" th:field="*{billingCity}" class="form-control mb-4 col-4" placeholder="Billing City">
+        <input type="text" th:field="*{billingState}" class="form-control mb-4 col-4" placeholder="Billing State">
+        <input type="text" th:field="*{billingCountry}" class="form-control mb-4 col-4" placeholder="Billing Country">
+        <input type="text" th:field="*{billingPostalCode}" class="form-control mb-4 col-4" placeholder="Billing Postal Code">
+        <input type="text" th:field="*{total}" class="form-control mb-4 col-4" placeholder="Total">
+        <button type="submit" class="btn btn-info col-2">Save</button>
+    </form>
+    <hr>
+    <a th:href="@{/invoices/list}">Back to Invoices list</a>
+</div>
+</body>
+</html>

@@ -14,7 +14,7 @@ public class Invoice {
     @Column(name = "InvoiceId", nullable = false)
     private int id;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @ManyToOne
     @JoinColumn(name = "CustomerId")
     private Customer customer;
 

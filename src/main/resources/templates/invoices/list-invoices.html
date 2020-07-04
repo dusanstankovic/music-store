@@ -11,6 +11,7 @@
 <div class="container">
     <h3>List of Invoices</h3>
     <hr>
+    <a th:href="@{/invoices/addInvoice}" class="btn btn-primary btn-sm mb-3">Add Invoice</a>
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
         <tr>
@@ -22,6 +23,7 @@
             <th>Billing country</th>
             <th>Billing postal code</th>
             <th>Total</th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
@@ -34,6 +36,14 @@
             <td th:text="${invoice.billingCountry}"/>
             <td th:text="${invoice.billingPostalCode}"/>
             <td th:text="${invoice.total}"/>
+            <td>
+                <!-- update button -->
+                <a th:href="@{/invoices/updateInvoice(invoiceId=${invoice.id})}" class="btn btn-info btn-sm">Update</a>
+                <!-- delete button -->
+                <a th:href="@{/invoices/delete(invoiceId=${invoice.id})}"
+                   class="btn btn-danger btn-sm"
+                   onclick="if (!(confirm('Are you sure you want to delete this invoice?'))) return false;">Delete</a>
+            </td>
         </tr>
         </tbody>
     </table>
