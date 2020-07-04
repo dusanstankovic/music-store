@@ -46,7 +46,7 @@ public class Customer {
     @Column(name = "Email", length = 60, nullable = false)
     private String email;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @ManyToOne
     @JoinColumn(name = "supportRepId")
     private Employee employee;
 
