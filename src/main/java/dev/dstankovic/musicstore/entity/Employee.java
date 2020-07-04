@@ -23,8 +23,7 @@ public class Employee {
     @Column(name = "Title", length = 30)
     private String title;
 
-    @ManyToOne(fetch = FetchType.LAZY,
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @ManyToOne
     @JoinColumn(name = "ReportsTo")
     private Employee employee;
 

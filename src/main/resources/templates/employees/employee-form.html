@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>Add Employee</title>
+</head>
+<body>
+<div class="container">
+    <h3>Employee details</h3>
+    <hr>
+    <p class="h4 mb-4">Save Employee</p>
+    <form action="#" th:action="@{/employees/save}" th:object="${employee}" method="post">
+
+        <!-- add hidden form field to handle update -->
+        <input type="hidden" th:field="*{id}" />
+
+        <input type="text" th:field="*{firstName}" class="form-control mb-4 col-4" placeholder="First name">
+        <input type="text" th:field="*{lastName}" class="form-control mb-4 col-4" placeholder="Last name">
+        <input type="text" th:field="*{title}" class="form-control mb-4 col-4" placeholder="Title">
+        <select th:field="${employee}" class="form-control mb-4 col-4">
+            <option value="0">Reports to:</option>
+            <option th:each="employee : ${employees}" th:value="${employee.id}"
+                    th:text="${employee.firstName + ' ' + employee.lastName}">Employee</option>
+        </select>
+        <input type="text" th:field="*{birthDate}" class="form-control mb-4 col-4" placeholder="Birth date">
+        <input type="text" th:field="*{hireDate}" class="form-control mb-4 col-4" placeholder="Hire date">
+        <input type="text" th:field="*{address}" class="form-control mb-4 col-4" placeholder="Address">
+        <input type="text" th:field="*{city}" class="form-control mb-4 col-4" placeholder="City">
+        <input type="text" th:field="*{state}" class="form-control mb-4 col-4" placeholder="State">
+        <input type="text" th:field="*{country}" class="form-control mb-4 col-4" placeholder="Country">
+        <input type="text" th:field="*{postalCode}" class="form-control mb-4 col-4" placeholder="Postal code">
+        <input type="text" th:field="*{phone}" class="form-control mb-4 col-4" placeholder="Phone">
+        <input type="text" th:field="*{fax}" class="form-control mb-4 col-4" placeholder="Fax">
+        <input type="text" th:field="*{email}" class="form-control mb-4 col-4" placeholder="Email">
+        <button type="submit" class="btn btn-info col-2">Save</button>
+    </form>
+    <hr>
+    <a th:href="@{/employees/list}">Back to Employees list</a>
+</div>
+</body>
+</html>

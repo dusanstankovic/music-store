@@ -11,6 +11,7 @@
 <div class="container">
     <h3>List of Employees</h3>
     <hr>
+    <a th:href="@{/employees/addEmployee}" class="btn btn-primary btn-sm mb-3">Add Employee</a>
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
         <tr>
@@ -28,6 +29,7 @@
             <th>Phone</th>
             <th>Fax</th>
             <th>Email</th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
@@ -46,6 +48,14 @@
             <td th:text="${employee.phone}"/>
             <td th:text="${employee.fax}"/>
             <td th:text="${employee.email}"/>
+            <td>
+                <!-- update button -->
+                <a th:href="@{/employees/updateEmployee(employeeId=${employee.id})}" class="btn btn-info btn-sm">Update</a>
+                <!-- delete button -->
+                <a th:href="@{/employees/delete(employeeId=${employee.id})}"
+                   class="btn btn-danger btn-sm"
+                   onclick="if (!(confirm('Are you sure you want to delete this employee?'))) return false;">Delete</a>
+            </td>
         </tr>
         </tbody>
     </table>
