@@ -11,7 +11,7 @@
 <div class="container">
     <h3>List of Media Types</h3>
     <hr>
-    <a th:href="@{/mediatypes/addMediaType}" class="btn btn-primary btn-sm mb-3">Add Media Type</a>
+    <a th:href="@{/mediatypes/showFormForAdd}" class="btn btn-primary btn-sm mb-3">Add Media Type</a>
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
         <tr>
@@ -24,7 +24,7 @@
             <td th:text="${mediatype.name}"/>
             <td>
                 <!-- update button -->
-                <a th:href="@{/mediatypes/updateMediaType(mediatypeId=${mediatype.id})}" class="btn btn-info btn-sm">Update</a>
+                <a th:href="@{/mediatypes/showFormForUpdate(mediatypeId=${mediatype.id})}" class="btn btn-info btn-sm">Update</a>
                 <!-- delete button -->
                 <a th:href="@{/mediatypes/delete(mediatypeId=${mediatype.id})}"
                    class="btn btn-danger btn-sm"

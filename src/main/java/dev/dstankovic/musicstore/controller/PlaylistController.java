@@ -27,11 +27,11 @@ public class PlaylistController {
 
         model.addAttribute("playlists", playlistService.findAll());
 
-        return "/playlists/list-playlists";
+        return "playlists/list-playlists";
     }
 
-    @GetMapping("/addPlaylist")
-    public String addPlaylist(Model model) {
+    @GetMapping("/showFormForAdd")
+    public String showFormForAdd(Model model) {
 
         Playlist playlist = new Playlist();
         model.addAttribute("playlist", playlist);
@@ -39,19 +39,11 @@ public class PlaylistController {
         List<Track> tracks = trackService.findAll();
         model.addAttribute("tracks", tracks);
 
-        return "/playlists/playlist-form";
+        return "playlists/playlist-form";
     }
 
-    @PostMapping("/save")
-    public String savePlaylist(@ModelAttribute("playlist") Playlist playlist) {
-
-        playlistService.save(playlist);
-
-        return "redirect:/playlists/list";
-    }
-
-    @GetMapping("/updatePlaylist")
-    public String updatePlaylist(@RequestParam("playlistId") int id, Model model) {
+    @PostMapping("/showFormForUpdate")
+    public String showFormForUpdate(@RequestParam("playlistId") int id, Model model) {
 
         Playlist playlist = playlistService.findById(id);
         model.addAttribute("playlist", playlist);
@@ -59,10 +51,18 @@ public class PlaylistController {
         List<Track> tracks = trackService.findAll();
         model.addAttribute("tracks", tracks);
 
-        return "/playlists/playlist-form";
+        return "playlists/playlist-form";
     }
 
-    @GetMapping("/delete")
+    @PostMapping("/save")
+    public String save(@ModelAttribute("playlist") Playlist playlist) {
+
+        playlistService.save(playlist);
+
+        return "redirect:/playlists/list";
+    }
+
+    @PostMapping("/delete")
     public String delete(@RequestParam("playlistId") int id) {
 
         playlistService.deleteById(id);

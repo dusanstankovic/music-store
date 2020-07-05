@@ -35,11 +35,11 @@ public class TrackController {
 
         model.addAttribute("tracks", trackService.findAll());
 
-        return "/tracks/list-tracks";
+        return "tracks/list-tracks";
     }
 
-    @GetMapping("/addTrack")
-    public String addTrack(Model model) {
+    @GetMapping("/showFormForAdd")
+    public String showFormForAdd(Model model) {
 
         Track track = new Track();
         model.addAttribute("track", track);
@@ -53,19 +53,11 @@ public class TrackController {
         List<Album> albums = albumService.findAll();
         model.addAttribute("albums", albums);
 
-        return "/tracks/track-form";
+        return "tracks/track-form";
     }
 
-    @PostMapping("/save")
-    public String save(@ModelAttribute("track") Track track) {
-
-        trackService.save(track);
-
-        return "redirect:/tracks/list";
-    }
-
-    @GetMapping("/updateTrack")
-    public String updateTrack(@RequestParam("trackId") int id, Model model) {
+    @PostMapping("/showFormForUpdate")
+    public String showFormForUpdate(@RequestParam("trackId") int id, Model model) {
 
         Track track = trackService.findById(id);
         model.addAttribute("track", track);
@@ -79,10 +71,18 @@ public class TrackController {
         List<Album> albums = albumService.findAll();
         model.addAttribute("albums", albums);
 
-        return "/tracks/track-form";
+        return "tracks/track-form";
     }
 
-    @GetMapping("/delete")
+    @PostMapping("/save")
+    public String save(@ModelAttribute("track") Track track) {
+
+        trackService.save(track);
+
+        return "redirect:/tracks/list";
+    }
+
+    @PostMapping("/delete")
     public String delete(@RequestParam("trackId") int id) {
 
         trackService.deleteById(id);

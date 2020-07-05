@@ -22,37 +22,37 @@ public class MediaTypeController {
 
         model.addAttribute("mediatypes", mediaTypeService.findAll());
 
-        return "/mediatypes/list-media-types";
+        return "mediatypes/list-media-types";
     }
 
-    @GetMapping("/addMediaType")
-    public String addMediaType(Model model) {
+    @GetMapping("/showFormForAdd")
+    public String showFormForAdd(Model model) {
 
         MediaType mediaType = new MediaType();
         model.addAttribute("mediatype", mediaType);
 
-        return "/mediatypes/media-type-form";
+        return "mediatypes/media-type-form";
+    }
+
+    @PostMapping("/showFormForUpdate")
+    public String showFormForUpdate(@RequestParam("mediatypeId") int id, Model model) {
+
+        MediaType mediaType = mediaTypeService.findById(id);
+        model.addAttribute("mediatype", mediaType);
+
+        return "mediatypes/media-type-form";
     }
 
     @PostMapping("/save")
-    public String saveMediaType(@ModelAttribute("mediatype") MediaType mediaType) {
+    public String save(@ModelAttribute("mediatype") MediaType mediaType) {
 
         mediaTypeService.save(mediaType);
 
         return "redirect:/mediatypes/list";
     }
 
-    @GetMapping("/updateMediaType")
-    public String updateMediaType(@RequestParam("mediatypeId") int id, Model model) {
-
-        MediaType mediaType = mediaTypeService.findById(id);
-        model.addAttribute("mediatype", mediaType);
-
-        return "/mediatypes/media-type-form";
-    }
-
-    @GetMapping("/delete")
-    public String deleteMediaType(@RequestParam("mediatypeId") int id) {
+    @PostMapping("/delete")
+    public String delete(@RequestParam("mediatypeId") int id) {
 
         mediaTypeService.deleteById(id);
 

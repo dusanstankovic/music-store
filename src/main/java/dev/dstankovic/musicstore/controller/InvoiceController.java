@@ -27,11 +27,11 @@ public class InvoiceController {
 
         model.addAttribute("invoices", invoiceService.findAll());
 
-        return "/invoices/list-invoices";
+        return "invoices/list-invoices";
     }
 
-    @GetMapping("/addInvoice")
-    public String addInvoice(Model model) {
+    @GetMapping("/showFormForAdd")
+    public String showFormForAdd(Model model) {
 
         Invoice invoice = new Invoice();
         model.addAttribute("invoice", invoice);
@@ -39,19 +39,11 @@ public class InvoiceController {
         List<Customer> customers = customerService.findAll();
         model.addAttribute("customers", customers);
 
-        return "/invoices/invoice-form";
+        return "invoices/invoice-form";
     }
 
-    @PostMapping("/save")
-    public String saveInvoice(@ModelAttribute("invoice") Invoice invoice) {
-
-        invoiceService.save(invoice);
-
-        return "redirect:/invoices/list";
-    }
-
-    @GetMapping("/updateInvoice")
-    public String updateInvoice(@RequestParam("invoiceId") int id, Model model) {
+    @PostMapping("/showFormForUpdate")
+    public String showFormForUpdate(@RequestParam("invoiceId") int id, Model model) {
 
         Invoice invoice = invoiceService.findById(id);
         model.addAttribute("invoice", invoice);
@@ -59,11 +51,19 @@ public class InvoiceController {
         List<Customer> customers = customerService.findAll();
         model.addAttribute("customers", customers);
 
-        return "/invoices/invoice-form";
+        return "invoices/invoice-form";
     }
 
-    @GetMapping("/delete")
-    public String deleteInvoice(@RequestParam("invoiceId") int id) {
+    @PostMapping("/save")
+    public String save(@ModelAttribute("invoice") Invoice invoice) {
+
+        invoiceService.save(invoice);
+
+        return "redirect:/invoices/list";
+    }
+
+    @PostMapping("/delete")
+    public String delete(@RequestParam("invoiceId") int id) {
 
         invoiceService.deleteById(id);
 

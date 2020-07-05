@@ -11,7 +11,7 @@
 <div class="container">
     <h3>List of Invoices</h3>
     <hr>
-    <a th:href="@{/invoices/addInvoice}" class="btn btn-primary btn-sm mb-3">Add Invoice</a>
+    <a th:href="@{/invoices/showFormForAdd}" class="btn btn-primary btn-sm mb-3">Add Invoice</a>
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
         <tr>
@@ -38,7 +38,7 @@
             <td th:text="${invoice.total}"/>
             <td>
                 <!-- update button -->
-                <a th:href="@{/invoices/updateInvoice(invoiceId=${invoice.id})}" class="btn btn-info btn-sm">Update</a>
+                <a th:href="@{/invoices/showFormForUpdate(invoiceId=${invoice.id})}" class="btn btn-info btn-sm">Update</a>
                 <!-- delete button -->
                 <a th:href="@{/invoices/delete(invoiceId=${invoice.id})}"
                    class="btn btn-danger btn-sm"

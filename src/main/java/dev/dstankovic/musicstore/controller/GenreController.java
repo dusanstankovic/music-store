@@ -22,37 +22,37 @@ public class GenreController {
 
         model.addAttribute("genres", genreService.findAll());
 
-        return "/genres/list-genres";
+        return "genres/list-genres";
     }
 
-    @GetMapping("/addGenre")
-    public String addGenre(Model model) {
+    @GetMapping("/showFormForAdd")
+    public String showFormForAdd(Model model) {
 
         Genre genre = new Genre();
         model.addAttribute("genre", genre);
 
-        return "/genres/genre-form";
+        return "genres/genre-form";
+    }
+
+    @PostMapping("/showFormForUpdate")
+    public String showFormForUpdate(@RequestParam("genreId") int id, Model model) {
+
+        Genre genre = genreService.findById(id);
+        model.addAttribute("genre", genre);
+
+        return "genres/genre-form";
     }
 
     @PostMapping("/save")
-    public String saveGenre(@ModelAttribute("genre") Genre genre) {
+    public String save(@ModelAttribute("genre") Genre genre) {
 
         genreService.save(genre);
 
         return "redirect:/genres/list";
     }
 
-    @GetMapping("/updateGenre")
-    public String updateGenre(@RequestParam("genreId") int id, Model model) {
-
-        Genre genre = genreService.findById(id);
-        model.addAttribute("genre", genre);
-
-        return "/genres/genre-form";
-    }
-
-    @GetMapping("/delete")
-    public String deleteGenre(@RequestParam("genreId") int id) {
+    @PostMapping("/delete")
+    public String delete(@RequestParam("genreId") int id) {
 
         genreService.deleteById(id);
 

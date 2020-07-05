@@ -11,7 +11,7 @@
 <div class="container">
     <h3>List of Albums</h3>
     <hr>
-    <a th:href="@{/albums/addAlbum}" class="btn btn-primary btn-sm mb-3">Add Album</a>
+    <a th:href="@{/albums/showFormForAdd}" class="btn btn-primary btn-sm mb-3">Add Album</a>
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
         <tr>
@@ -26,7 +26,7 @@
             <td th:text="${album.artist.name}"/>
             <td>
                 <!-- update button -->
-                <a th:href="@{/albums/updateAlbum(albumId=${album.id})}" class="btn btn-info btn-sm">Update</a>
+                <a th:href="@{/albums/showFormForUpdate(albumId=${album.id})}" class="btn btn-info btn-sm">Update</a>
                 <!-- delete button -->
                 <a th:href="@{/albums/delete(albumId=${album.id})}"
                    class="btn btn-danger btn-sm"

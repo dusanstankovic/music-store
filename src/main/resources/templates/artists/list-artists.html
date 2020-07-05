@@ -11,7 +11,7 @@
 <div class="container">
     <h3>List of Artists</h3>
     <hr>
-    <a th:href="@{/artists/addArtist}" class="btn btn-primary btn-sm mb-3">Add Artist</a>
+    <a th:href="@{/artists/showFormForAdd}" class="btn btn-primary btn-sm mb-3">Add Artist</a>
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
         <tr>
@@ -24,7 +24,7 @@
             <td th:text="${artist.name}"/>
             <td>
                 <!-- update button -->
-                <a th:href="@{/artists/updateArtist(artistId=${artist.id})}" class="btn btn-info btn-sm">Update</a>
+                <a th:href="@{/artists/showFormForUpdate(artistId=${artist.id})}" class="btn btn-info btn-sm">Update</a>
                 <!-- delete button -->
                 <a th:href="@{/artists/delete(artistId=${artist.id})}"
                    class="btn btn-danger btn-sm"

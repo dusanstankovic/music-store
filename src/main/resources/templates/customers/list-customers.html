@@ -11,7 +11,7 @@
 <div class="container">
     <h3>List of Customers</h3>
     <hr>
-    <a th:href="@{/customers/addCustomer}" class="btn btn-primary btn-sm mb-3">Add Customer</a>
+    <a th:href="@{/customers/showFormForAdd}" class="btn btn-primary btn-sm mb-3">Add Customer</a>
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
         <tr>
@@ -46,7 +46,7 @@
             <td th:text="${customer.employee.firstName + ' ' + customer.employee.lastName}"/>
             <td>
                 <!-- update button -->
-                <a th:href="@{/customers/updateCustomer(customerId=${customer.id})}" class="btn btn-info btn-sm">Update</a>
+                <a th:href="@{/customers/showFormForUpdate(customerId=${customer.id})}" class="btn btn-info btn-sm">Update</a>
                 <!-- delete button -->
                 <a th:href="@{/customers/delete(customerId=${customer.id})}"
                    class="btn btn-danger btn-sm"

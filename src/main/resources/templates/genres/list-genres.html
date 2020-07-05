@@ -11,7 +11,7 @@
 <div class="container">
     <h3>List of Genres</h3>
     <hr>
-    <a th:href="@{/genres/addGenre}" class="btn btn-primary btn-sm mb-3">Add Genre</a>
+    <a th:href="@{/genres/showFormForAdd}" class="btn btn-primary btn-sm mb-3">Add Genre</a>
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
         <tr>
@@ -24,7 +24,7 @@
             <td th:text="${genre.name}"/>
             <td>
                 <!-- update button -->
-                <a th:href="@{/genres/updateGenre(genreId=${genre.id})}" class="btn btn-info btn-sm">Update</a>
+                <a th:href="@{/genres/showFormForUpdate(genreId=${genre.id})}" class="btn btn-info btn-sm">Update</a>
                 <!-- delete button -->
                 <a th:href="@{/genres/delete(genreId=${genre.id})}"
                    class="btn btn-danger btn-sm"

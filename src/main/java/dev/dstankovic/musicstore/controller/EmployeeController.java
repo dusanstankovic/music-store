@@ -23,11 +23,11 @@ public class EmployeeController {
 
         model.addAttribute("employees", employeeService.findAll());
 
-        return "/employees/list-employees";
+        return "employees/list-employees";
     }
 
-    @GetMapping("/addEmployee")
-    public String addEmployee(Model model) {
+    @GetMapping("/showFormForAdd")
+    public String showFormForAdd(Model model) {
 
         Employee employee = new Employee();
         model.addAttribute("employee", employee);
@@ -35,19 +35,11 @@ public class EmployeeController {
         List<Employee> employees = employeeService.findAll();
         model.addAttribute("employees", employees);
 
-        return "/employees/employee-form";
+        return "employees/employee-form";
     }
 
-    @PostMapping("/save")
-    public String saveEmployee(@ModelAttribute("employee") Employee employee) {
-
-        employeeService.save(employee);
-
-        return "redirect:/employees/list";
-    }
-
-    @GetMapping("/updateEmployee")
-    public String updateEmployee(@RequestParam("employeeId") int id, Model model) {
+    @PostMapping("/showFormForUpdate")
+    public String showFormForUpdate(@RequestParam("employeeId") int id, Model model) {
 
         Employee employee = employeeService.findById(id);
         model.addAttribute("employee", employee);
@@ -55,11 +47,19 @@ public class EmployeeController {
         List<Employee> employees = employeeService.findAll();
         model.addAttribute("employees", employees);
 
-        return "/employees/employee-form";
+        return "employees/employee-form";
     }
 
-    @GetMapping("/delete")
-    public String deleteEmployee(@RequestParam("employeeId") int id) {
+    @PostMapping("/save")
+    public String save(@ModelAttribute("employee") Employee employee) {
+
+        employeeService.save(employee);
+
+        return "redirect:/employees/list";
+    }
+
+    @PostMapping("/delete")
+    public String delete(@RequestParam("employeeId") int id) {
 
         employeeService.deleteById(id);
 

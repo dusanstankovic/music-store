@@ -11,7 +11,7 @@
 <div class="container">
     <h3>List of Tracks</h3>
     <hr>
-    <a th:href="@{/tracks/addTrack}" class="btn btn-primary btn-sm mb-3">Add Track</a>
+    <a th:href="@{/tracks/showFormForAdd}" class="btn btn-primary btn-sm mb-3">Add Track</a>
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
         <tr>
@@ -38,7 +38,7 @@
             <td th:text="${track.unitPrice}"/>
             <td>
                 <!-- update button -->
-                <a th:href="@{/tracks/updateTrack(trackId=${track.id})}" class="btn btn-info btn-sm">Update</a>
+                <a th:href="@{/tracks/showFormForUpdate(trackId=${track.id})}" class="btn btn-info btn-sm">Update</a>
                 <!-- delete button -->
                 <a th:href="@{/tracks/delete(trackId=${track.id})}"
                    class="btn btn-danger btn-sm"

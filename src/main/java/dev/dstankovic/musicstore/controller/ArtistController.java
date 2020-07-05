@@ -22,36 +22,36 @@ public class ArtistController {
 
         model.addAttribute("artists", artistService.findAll());
 
-        return "/artists/list-artists";
+        return "artists/list-artists";
     }
 
-    @GetMapping("/addArtist")
-    public String addArtist(Model model) {
+    @GetMapping("/showFormForAdd")
+    public String showFormForAdd(Model model) {
 
         Artist artist = new Artist();
         model.addAttribute("artist", artist);
 
-        return "/artists/artist-form";
+        return "artists/artist-form";
+    }
+
+    @PostMapping("/showFormForUpdate")
+    public String showFormForUpdate(@RequestParam("artistId") int id, Model model) {
+
+        Artist artist = artistService.findById(id);
+        model.addAttribute("artist", artist);
+
+        return "artists/artist-form";
     }
 
     @PostMapping("/save")
-    public String saveArtist(@ModelAttribute("artist") Artist artist) {
+    public String save(@ModelAttribute("artist") Artist artist) {
 
         artistService.save(artist);
 
         return "redirect:/artists/list";
     }
 
-    @GetMapping("/updateArtist")
-    public String updateArtist(@RequestParam("artistId") int id, Model model) {
-
-        Artist artist = artistService.findById(id);
-        model.addAttribute("artist", artist);
-
-        return "/artists/artist-form";
-    }
-
-    @GetMapping("/delete")
+    @PostMapping("/delete")
     public String delete(@RequestParam("artistId") int id) {
 
         artistService.deleteById(id);
