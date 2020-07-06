@@ -1,6 +1,8 @@
 package dev.dstankovic.musicstore.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,9 +16,13 @@ public class Employee {
     @Column(name = "EmployeeId", nullable = false)
     private int id;
 
+    @NotNull(message = "Last name is required")
+    @Size(min = 1, message = "Last name must contain one or more characters")
     @Column(name = "LastName", length = 20, nullable = false)
     private String lastName;
 
+    @NotNull(message = "First name is required")
+    @Size(min = 1, message = "First name must contain one or more characters")
     @Column(name = "FirstName", length = 20, nullable = false)
     private String firstName;
 

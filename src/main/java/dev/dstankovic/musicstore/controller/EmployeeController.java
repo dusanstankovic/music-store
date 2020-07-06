@@ -4,8 +4,10 @@ import dev.dstankovic.musicstore.entity.Employee;
 import dev.dstankovic.musicstore.service.EmployeeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -38,7 +40,7 @@ public class EmployeeController {
         return "employees/employee-form";
     }
 
-    @PostMapping("/showFormForUpdate")
+    @GetMapping("/showFormForUpdate")
     public String showFormForUpdate(@RequestParam("employeeId") int id, Model model) {
 
         Employee employee = employeeService.findById(id);
@@ -51,9 +53,13 @@ public class EmployeeController {
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute("employee") Employee employee) {
+    public String save(@Valid @ModelAttribute("employee") Employee employee, BindingResult bindingResult) {
 
-        employeeService.save(employee);
+        if (bindingResult.hasErrors()) {
+            return "employees/employee-form";
+        } else {
+            employeeService.save(employee);
+        }
 
         return "redirect:/employees/list";
     }
