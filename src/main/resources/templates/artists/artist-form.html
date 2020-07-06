@@ -15,13 +15,16 @@
     <form action="#" th:action="@{/artists/save}" th:object="${artist}" method="post">
 
         <!-- add hidden form field to handle update -->
-        <input type="hidden" th:field="*{id}" />
+        <input type="hidden" th:field="*{id}"/>
 
+        <label>Artist name:</label>
         <input type="text" th:field="*{name}" class="form-control mb-4 col-4" placeholder="Artist name">
+        <span class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"/>
         <button type="submit" class="btn btn-info col-2">Save</button>
+        <a th:href="@{/artists/list}">Back to Artists list</a>
+
     </form>
     <hr>
-    <a th:href="@{/artists/list}">Back to Artists list</a>
 </div>
 </body>
 </html>

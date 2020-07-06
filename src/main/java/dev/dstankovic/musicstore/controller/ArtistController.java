@@ -4,7 +4,10 @@ import dev.dstankovic.musicstore.entity.Artist;
 import dev.dstankovic.musicstore.service.ArtistService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/artists")
@@ -34,7 +37,7 @@ public class ArtistController {
         return "artists/artist-form";
     }
 
-    @PostMapping("/showFormForUpdate")
+    @GetMapping("/showFormForUpdate")
     public String showFormForUpdate(@RequestParam("artistId") int id, Model model) {
 
         Artist artist = artistService.findById(id);
@@ -44,9 +47,13 @@ public class ArtistController {
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute("artist") Artist artist) {
+    public String save(@Valid @ModelAttribute("artist") Artist artist, BindingResult bindingResult) {
 
-        artistService.save(artist);
+        if (bindingResult.hasErrors()) {
+            return "artists/artist-form";
+        } else {
+            artistService.save(artist);
+        }
 
         return "redirect:/artists/list";
     }
