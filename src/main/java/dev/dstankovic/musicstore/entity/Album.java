@@ -1,6 +1,8 @@
 package dev.dstankovic.musicstore.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,9 +15,12 @@ public class Album {
     @Column(name = "albumId", nullable = false)
     private int id;
 
+    @NotNull(message = "Album title is required")
+    @Size(min = 1, message = "Album title must contain one or more characters")
     @Column(name = "Title", length = 160, nullable = false)
     private String title;
 
+    @NotNull(message = "Please select artist")
     @ManyToOne
     @JoinColumn(name = "ArtistId")
     private Artist artist;

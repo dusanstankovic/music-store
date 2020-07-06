@@ -6,8 +6,10 @@ import dev.dstankovic.musicstore.service.AlbumService;
 import dev.dstankovic.musicstore.service.ArtistService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -42,7 +44,7 @@ public class AlbumController {
         return "albums/album-form";
     }
 
-    @PostMapping("/showFormForUpdate")
+    @GetMapping("/showFormForUpdate")
     public String showFormForUpdate(@RequestParam("albumId") int id, Model model) {
 
         Album album = albumService.findById(id);
@@ -55,14 +57,16 @@ public class AlbumController {
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute("album") Album album) {
+    public String save(@Valid @ModelAttribute("album") Album album, BindingResult bindingResult) {
 
-        albumService.save(album);
+        if (bindingResult.hasErrors()) {
+            return "albums/album-form";
+        } else {
+            albumService.save(album);
+        }
 
         return "redirect:/albums/list";
     }
-
-
 
     @PostMapping("/delete")
     public String delete(@RequestParam("albumId") int id) {

@@ -17,11 +17,16 @@
         <!-- add hidden form field to handle update -->
         <input type="hidden" th:field="*{id}" />
 
+        <label>Album Title:</label>
         <input type="text" th:field="*{title}" class="form-control mb-4 col-4" placeholder="Album title">
+        <span class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"/>
+        <label>Artist:</label>
         <select th:field="${album.artist.id}" class="form-control mb-4 col-4">
             <option value="0">Select artist:</option>
             <option th:each="artist : ${artists}" th:value="${artist.id}" th:text="${artist.name}">Artist</option>
         </select>
+        <span class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('artist.id')}"
+              th:errors="*{artist.id}"/>
         <button type="submit" class="btn btn-info col-2">Save</button>
     </form>
     <hr>

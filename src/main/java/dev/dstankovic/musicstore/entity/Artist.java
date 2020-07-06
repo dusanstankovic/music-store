@@ -16,7 +16,7 @@ public class Artist {
     private int id;
 
     @NotNull(message = "Artist name is required")
-    @Size(min = 1, message = "Artist name should contain one or more characters")
+    @Size(min = 1, message = "Artist name must contain one or more characters")
     @Column(name = "Name", length = 120)
     private String name;
 
