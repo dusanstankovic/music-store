@@ -1,6 +1,7 @@
 package dev.dstankovic.musicstore.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ public class Track {
     @Column(name = "trackId", nullable = false)
     private int id;
 
+    @NotNull(message = "Track name is required")
     @Column(name = "Name", length = 200, nullable = false)
     private String name;
 
@@ -20,6 +22,7 @@ public class Track {
     @JoinColumn(name = "AlbumId")
     private Album album;
 
+    @NotNull(message = "Media type is required")
     @ManyToOne
     @JoinColumn(name = "MediaTypeId")
     private MediaType mediaType;
@@ -31,12 +34,14 @@ public class Track {
     @Column(name = "Composer", length = 220)
     private String composer;
 
+    @NotNull(message = "Length in milliseconds is required")
     @Column(name = "Milliseconds", nullable = false)
     private int milliseconds;
 
     @Column(name = "Bytes")
     private int bytes;
 
+    @NotNull(message = "Unit price is required")
     @Column(name = "UnitPrice", nullable = false)
     private double unitPrice;
 

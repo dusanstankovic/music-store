@@ -10,8 +10,10 @@ import dev.dstankovic.musicstore.service.MediaTypeService;
 import dev.dstankovic.musicstore.service.TrackService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -56,7 +58,7 @@ public class TrackController {
         return "tracks/track-form";
     }
 
-    @PostMapping("/showFormForUpdate")
+    @GetMapping("/showFormForUpdate")
     public String showFormForUpdate(@RequestParam("trackId") int id, Model model) {
 
         Track track = trackService.findById(id);
@@ -75,9 +77,13 @@ public class TrackController {
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute("track") Track track) {
+    public String save(@Valid @ModelAttribute("track") Track track, BindingResult bindingResult) {
 
-        trackService.save(track);
+        if (bindingResult.hasErrors()) {
+            return "tracks/track-form";
+        } else {
+            trackService.save(track);
+        }
 
         return "redirect:/tracks/list";
     }

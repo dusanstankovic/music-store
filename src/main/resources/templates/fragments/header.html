@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Music Store Demo">
+    <meta name="author" content="Dusan Stankovic">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+          integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <title>Music Store Home Page</title>
+</head>
+<body>
+<div th:fragment="header">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Music Store</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarEmployeesDropdown" role="button"
+                       data-toggle="dropdown" aria-expanded="false">
+                        Employees
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarEmployeesDropdown">
+                        <li><a class="dropdown-item" th:href="@{/employees/list}">Employees List</a></li>
+                        <li><a class="dropdown-item" th:href="@{/employees/showFormForAdd}">Add New Employee</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Employees report</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarCustomersDropdown" role="button"
+                       data-toggle="dropdown" aria-expanded="false">
+                        Customers
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarCustomersDropdown">
+                        <li><a class="dropdown-item" th:href="@{/customers/list}">Customers List</a></li>
+                        <li><a class="dropdown-item" th:href="@{/customers/showFormForAdd}">Add New Customer</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Customers report</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarInvoicesDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                        Invoices
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarInvoicesDropdown">
+                        <li><a class="dropdown-item" th:href="@{/invoices/list}">Invoices List</a></li>
+                        <li><a class="dropdown-item" th:href="@{/invoices/showFormForAdd}">Add New Invoice</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Invoices report</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarTracksDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                        Tracks
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarTracksDropdown">
+                        <li><a class="dropdown-item" th:href="@{/tracks/list}">Tracks List</a></li>
+                        <li><a class="dropdown-item" th:href="@{/tracks/showFormForAdd}">Add New Track</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Tracks report</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarArtistsDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                        Artists
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarArtistsDropdown">
+                        <li><a class="dropdown-item" th:href="@{/artists/list}">Artists List</a></li>
+                        <li><a class="dropdown-item" th:href="@{/artists/showFormForAdd}">Add New Artist</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Artists report</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarAlbumsDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                        Albums
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarAlbumsDropdown">
+                        <li><a class="dropdown-item" th:href="@{/albums/list}">Albums List</a></li>
+                        <li><a class="dropdown-item" th:href="@{/albums/showFormForAdd}">Add New Album</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Albums report</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarGenresDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                        Genres
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarGenresDropdown">
+                        <li><a class="dropdown-item" th:href="@{/genres/list}">Genres List</a></li>
+                        <li><a class="dropdown-item" th:href="@{/genres/showFormForAdd}">Add New Genre</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Genres report</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarMediaTypeDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                        Media Types
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarMediaTypeDropdown">
+                        <li><a class="dropdown-item" th:href="@{/mediatypes/list}">Media Types List</a></li>
+                        <li><a class="dropdown-item" th:href="@{/mediatypes/showFormForAdd}">Add New Media Type</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Media Types report</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                </li>
+            </ul>
+            <form class="d-flex">
+                <input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
+</div>
+</body>
+</html>

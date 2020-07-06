@@ -3,24 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <title>List of Genres</title>
+    <meta name="description" content="Music Store Demo">
+    <meta name="author" content="Dusan Stankovic">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+          integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <title>Music Store - List of Genres</title>
 </head>
 <body>
+
+<div class="container-fluid" th:replace="fragments/header :: header">
+    <!-- Header -->
+</div>
+
 <div class="container">
     <h3>List of Genres</h3>
     <hr>
     <a th:href="@{/genres/showFormForAdd}" class="btn btn-primary btn-sm mb-3">Add Genre</a>
-    <table class="table table-bordered table-striped">
-        <thead class="thead-dark">
+    <table class="table table-striped table-hover">
+        <thead>
         <tr>
+            <th>#</th>
             <th>Genre name</th>
             <th>Action</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="genre : ${genres}">
+            <td th:text="${genre.id}" />
             <td th:text="${genre.name}"/>
             <td>
                 <!-- update button -->
@@ -34,5 +43,10 @@
         </tbody>
     </table>
 </div>
+
+<div class="container-fluid" th:replace="fragments/footer :: footer">
+    <!-- Footer -->
+</div>
+
 </body>
 </html>

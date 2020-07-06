@@ -3,38 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <title>List of Invoices</title>
+    <meta name="description" content="Music Store Demo">
+    <meta name="author" content="Dusan Stankovic">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+          integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <title>Music Store - List of Invoices</title>
 </head>
 <body>
+
+<div class="container-fluid" th:replace="fragments/header :: header">
+    <!-- Header -->
+</div>
+
 <div class="container">
     <h3>List of Invoices</h3>
     <hr>
     <a th:href="@{/invoices/showFormForAdd}" class="btn btn-primary btn-sm mb-3">Add Invoice</a>
-    <table class="table table-bordered table-striped">
-        <thead class="thead-dark">
+    <table class="table table-striped table-hover">
+        <thead>
         <tr>
+            <th>#</th>
             <th>Customer</th>
             <th>Invoice date</th>
-            <th>Billing address</th>
-            <th>Billing city</th>
-            <th>Billing State</th>
-            <th>Billing country</th>
-            <th>Billing postal code</th>
             <th>Total</th>
             <th>Action</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="invoice : ${invoices}">
+            <td th:text="${invoice.id}" />
             <td th:text="${invoice.customer.firstName + ' ' + invoice.customer.lastName}"/>
             <td th:text="${invoice.invoiceDate}"/>
-            <td th:text="${invoice.billingAddress}"/>
-            <td th:text="${invoice.billingCity}"/>
-            <td th:text="${invoice.billingState}"/>
-            <td th:text="${invoice.billingCountry}"/>
-            <td th:text="${invoice.billingPostalCode}"/>
             <td th:text="${invoice.total}"/>
             <td>
                 <!-- update button -->
@@ -48,5 +47,10 @@
         </tbody>
     </table>
 </div>
+
+<div class="container-fluid" th:replace="fragments/footer :: footer">
+    <!-- Footer -->
+</div>
+
 </body>
 </html>

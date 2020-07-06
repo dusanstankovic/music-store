@@ -3,23 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <title>List of Tracks</title>
+    <meta name="description" content="Music Store Demo">
+    <meta name="author" content="Dusan Stankovic">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+          integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <title>Music Store - List of Tracks</title>
 </head>
 <body>
+
+<div class="container-fluid" th:replace="fragments/header :: header">
+    <!-- Header -->
+</div>
+
 <div class="container">
     <h3>List of Tracks</h3>
     <hr>
     <a th:href="@{/tracks/showFormForAdd}" class="btn btn-primary btn-sm mb-3">Add Track</a>
-    <table class="table table-bordered table-striped">
-        <thead class="thead-dark">
+    <table class="table table-striped table-hover">
+        <thead>
         <tr>
+            <th>#</th>
             <th>Track name</th>
             <th>Album title</th>
-            <th>Media type</th>
-            <th>Genre</th>
-            <th>Composer</th>
             <th>Length (ms)</th>
             <th>Size (bytes)</th>
             <th>Unit price</th>
@@ -28,11 +33,9 @@
         </thead>
         <tbody>
         <tr th:each="track : ${tracks}">
+            <td th:text="${track.id}" />
             <td th:text="${track.name}"/>
             <td th:text="${track.album.title}"/>
-            <td th:text="${track.mediaType.name}"/>
-            <td th:text="${track.genre.name}"/>
-            <td th:text="${track.composer}"/>
             <td th:text="${track.milliseconds}"/>
             <td th:text="${track.bytes}"/>
             <td th:text="${track.unitPrice}"/>
@@ -48,5 +51,10 @@
         </tbody>
     </table>
 </div>
+
+<div class="container-fluid" th:replace="fragments/footer :: footer">
+    <!-- Footer -->
+</div>
+
 </body>
 </html>

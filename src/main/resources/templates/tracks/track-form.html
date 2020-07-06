@@ -3,11 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <title>Add Track</title>
+    <meta name="description" content="Music Store Demo">
+    <meta name="author" content="Dusan Stankovic">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+          integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <title>Music Store - Track Form</title>
 </head>
 <body>
+
+<div class="container-fluid" th:replace="fragments/header :: header">
+    <!-- Header -->
+</div>
+
 <div class="container">
     <h3>Track details</h3>
     <hr>
@@ -17,27 +24,48 @@
         <!-- add hidden form field to handle update -->
         <input type="hidden" th:field="*{id}" />
 
+        <label>Track name:</label>
         <input type="text" th:field="*{name}" class="form-control mb-4 col-4" placeholder="Track name">
+        <span class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"/>
+        <label>Album:</label>
         <select th:field="${track.album.id}" class="form-control mb-4 col-4">
             <option value="0">Select album:</option>
             <option th:each="album : ${albums}" th:value="${album.id}" th:text="${album.title}">Album</option>
         </select>
+        <label>Media type:</label>
         <select th:field="${track.mediaType.id}" class="form-control mb-4 col-4">
             <option value="0">Select media type:</option>
-            <option th:each="mediatype : ${mediatypes}" th:value="${mediatype.id}" th:text="${mediatype.name}">Media Type</option>
+            <option th:each="mediatype : ${mediatypes}" th:value="${mediatype.id}"
+                    th:text="${mediatype.name}">Media Type</option>
         </select>
+        <span class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('mediatype')}"
+              th:errors="*{mediaType}"/>
+        <label>Genre:</label>
         <select th:field="${track.genre.id}" class="form-control mb-4 col-4">
             <option value="0">Select genre:</option>
             <option th:each="genre : ${genres}" th:value="${genre.id}" th:text="${genre.name}">Genre</option>
         </select>
+        <label>Composer:</label>
         <input type="text" th:field="*{composer}" class="form-control mb-4 col-4" placeholder="Composer">
+        <label>Length in milliseconds:</label>
         <input type="text" th:field="*{milliseconds}" class="form-control mb-4 col-4" placeholder="0">
+        <span class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('milliseconds')}"
+              th:errors="*{milliseconds}"/>
+        <label>Size in bytes:</label>
         <input type="text" th:field="*{bytes}" class="form-control mb-4 col-4" placeholder="0">
+        <label>Unit price:</label>
         <input type="text" th:field="*{unitPrice}" class="form-control mb-4 col-4" placeholder="0.00">
+        <span class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('unitPrice')}"
+              th:errors="*{unitPrice}" />
         <button type="submit" class="btn btn-info col-2">Save</button>
     </form>
     <hr>
     <a th:href="@{/tracks/list}">Back to Track list</a>
 </div>
+
+<div class="container-fluid" th:replace="fragments/footer :: footer">
+    <!-- Footer -->
+</div>
+
 </body>
 </html>

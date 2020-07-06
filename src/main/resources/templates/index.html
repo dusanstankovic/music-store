@@ -7,28 +7,12 @@
     <meta name="author" content="Dusan Stankovic">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
           integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
-    <title>Music Store - Playlist Form</title>
+    <title>Music Store Home Page</title>
 </head>
 <body>
 
 <div class="container-fluid" th:replace="fragments/header :: header">
     <!-- Header -->
-</div>
-
-<div class="container">
-    <h3>Playlist details</h3>
-    <hr>
-    <p class="h4 mb-4">Save Playlist</p>
-    <form action="#" th:action="@{/playlists/save}" th:object="${playlist}" method="post">
-
-        <!-- add hidden form field to handle update -->
-        <input type="hidden" th:field="*{id}" />
-
-        <input type="text" th:field="*{name}" class="form-control mb-4 col-4" placeholder="Playlist name">
-        <button type="submit" class="btn btn-info col-2">Save</button>
-    </form>
-    <hr>
-    <a th:href="@{/playlists/list}">Back to Playlists</a>
 </div>
 
 <div class="container-fluid" th:replace="fragments/footer :: footer">
