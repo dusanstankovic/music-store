@@ -4,7 +4,10 @@ import dev.dstankovic.musicstore.entity.Genre;
 import dev.dstankovic.musicstore.service.GenreService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/genres")
@@ -34,7 +37,7 @@ public class GenreController {
         return "genres/genre-form";
     }
 
-    @PostMapping("/showFormForUpdate")
+    @GetMapping("/showFormForUpdate")
     public String showFormForUpdate(@RequestParam("genreId") int id, Model model) {
 
         Genre genre = genreService.findById(id);
@@ -44,9 +47,13 @@ public class GenreController {
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute("genre") Genre genre) {
+    public String save(@Valid @ModelAttribute("genre") Genre genre, BindingResult bindingResult) {
 
-        genreService.save(genre);
+        if (bindingResult.hasErrors()) {
+            return "genres/genre-form";
+        } else {
+            genreService.save(genre);
+        }
 
         return "redirect:/genres/list";
     }
