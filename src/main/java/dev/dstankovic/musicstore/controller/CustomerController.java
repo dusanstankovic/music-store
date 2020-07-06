@@ -6,8 +6,10 @@ import dev.dstankovic.musicstore.service.CustomerService;
 import dev.dstankovic.musicstore.service.EmployeeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -43,7 +45,7 @@ public class CustomerController {
         return "customers/customer-form";
     }
 
-    @PostMapping("/showFormForUpdate")
+    @GetMapping("/showFormForUpdate")
     public String showFormForUpdate(@RequestParam("customerId") int id, Model model) {
 
         Customer customer = customerService.findById(id);
@@ -56,9 +58,13 @@ public class CustomerController {
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute("customer") Customer customer) {
+    public String save(@Valid @ModelAttribute("customer") Customer customer, BindingResult bindingResult) {
 
-        customerService.save(customer);
+        if (bindingResult.hasErrors()) {
+            return "customers/customer-form";
+        } else {
+            customerService.save(customer);
+        }
 
         return "redirect:/customers/list";
     }

@@ -17,17 +17,32 @@
         <!-- add hidden form field to handle update -->
         <input type="hidden" th:field="*{id}" />
 
+        <label>First name:</label>
         <input type="text" th:field="*{firstName}" class="form-control mb-4 col-4" placeholder="First Name">
+        <span class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"/>
+        <label>Last name:</label>
         <input type="text" th:field="*{lastName}" class="form-control mb-4 col-4" placeholder="Last Name">
+        <span class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"/>
+        <label>Company name:</label>
         <input type="text" th:field="*{company}" class="form-control mb-4 col-4" placeholder="Company Name">
+        <label>Address:</label>
         <input type="text" th:field="*{address}" class="form-control mb-4 col-4" placeholder="Address">
+        <label>City:</label>
         <input type="text" th:field="*{city}" class="form-control mb-4 col-4" placeholder="City">
+        <label>State:</label>
         <input type="text" th:field="*{state}" class="form-control mb-4 col-4" placeholder="State">
+        <label>Country:</label>
         <input type="text" th:field="*{country}" class="form-control mb-4 col-4" placeholder="Country">
+        <label>Postal code:</label>
         <input type="text" th:field="*{postalCode}" class="form-control mb-4 col-4" placeholder="Postal code">
+        <label>Phone:</label>
         <input type="text" th:field="*{phone}" class="form-control mb-4 col-4" placeholder="Phone">
+        <label>Fax:</label>
         <input type="text" th:field="*{fax}" class="form-control mb-4 col-4" placeholder="Fax">
+        <label>Email:</label>
         <input type="text" th:field="*{email}" class="form-control mb-4 col-4" placeholder="Email">
+        <span class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"/>
+        <label>Customer representative:</label>
         <select th:field="${customer.employee.id}" class="form-control mb-4 col-4">
             <option value="0">Select customer rep:</option>
             <option th:each="employee : ${employees}" th:value="${employee.id}"
