@@ -4,7 +4,10 @@ import dev.dstankovic.musicstore.entity.MediaType;
 import dev.dstankovic.musicstore.service.MediaTypeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/mediatypes")
@@ -34,7 +37,7 @@ public class MediaTypeController {
         return "mediatypes/media-type-form";
     }
 
-    @PostMapping("/showFormForUpdate")
+    @GetMapping("/showFormForUpdate")
     public String showFormForUpdate(@RequestParam("mediatypeId") int id, Model model) {
 
         MediaType mediaType = mediaTypeService.findById(id);
@@ -44,9 +47,13 @@ public class MediaTypeController {
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute("mediatype") MediaType mediaType) {
+    public String save(@Valid @ModelAttribute("mediatype") MediaType mediaType, BindingResult bindingResult) {
 
-        mediaTypeService.save(mediaType);
+        if (bindingResult.hasErrors()) {
+            return "mediatypes/media-type-form";
+        } else {
+            mediaTypeService.save(mediaType);
+        }
 
         return "redirect:/mediatypes/list";
     }

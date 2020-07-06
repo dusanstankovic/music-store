@@ -1,6 +1,8 @@
 package dev.dstankovic.musicstore.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "mediatype", schema = "chinook")
@@ -11,6 +13,8 @@ public class MediaType {
     @Column(name = "MediaTypeId", nullable = false)
     private int id;
 
+    @NotNull(message = "Media type name is required")
+    @Size(min = 1, message = "Media type name must contain one or more characters")
     @Column(name = "Name", length = 120)
     private String name;
 

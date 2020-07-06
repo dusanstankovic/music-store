@@ -17,7 +17,9 @@
         <!-- add hidden form field to handle update -->
         <input type="hidden" th:field="*{id}" />
 
+        <label>Media type name:</label>
         <input type="text" th:field="*{name}" class="form-control mb-4 col-4" placeholder="Media Type Name">
+        <span class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"/>
         <button type="submit" class="btn btn-info col-2">Save</button>
     </form>
     <hr>
