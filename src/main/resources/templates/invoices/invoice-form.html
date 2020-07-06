@@ -17,18 +17,31 @@
         <!-- add hidden form field to handle update -->
         <input type="hidden" th:field="*{id}" />
 
+        <label>Customer name:</label>
         <select th:field="${invoice.customer.id}" class="form-control mb-4 col-4">
             <option value="0">Select customer:</option>
             <option th:each="customer : ${customers}" th:value="${customer.id}"
                     th:text="${customer.firstName + ' ' + customer.lastName}">Customer</option>
         </select>
+        <span class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('customer.id')}"
+              th:errors="${invoice.customer.id}"/>
+        <label>Invoice date:</label>
         <input type="text" th:field="*{invoiceDate}" class="form-control mb-4 col-4" placeholder="Invoice Date">
+        <span class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('invoiceDate')}"
+              th:errors="*{invoiceDate}"/>
+        <label>Billing address:</label>
         <input type="text" th:field="*{billingAddress}" class="form-control mb-4 col-4" placeholder="Billing Address">
+        <label>Billing city:</label>
         <input type="text" th:field="*{billingCity}" class="form-control mb-4 col-4" placeholder="Billing City">
+        <label>Billing state:</label>
         <input type="text" th:field="*{billingState}" class="form-control mb-4 col-4" placeholder="Billing State">
+        <label>Billing country:</label>
         <input type="text" th:field="*{billingCountry}" class="form-control mb-4 col-4" placeholder="Billing Country">
+        <label>Billing postal code:</label>
         <input type="text" th:field="*{billingPostalCode}" class="form-control mb-4 col-4" placeholder="Billing Postal Code">
+        <label>Total:</label>
         <input type="text" th:field="*{total}" class="form-control mb-4 col-4" placeholder="Total">
+        <span class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('total')}" th:errors="*{total}"/>
         <button type="submit" class="btn btn-info col-2">Save</button>
     </form>
     <hr>

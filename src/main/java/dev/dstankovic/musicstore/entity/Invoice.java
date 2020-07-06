@@ -1,6 +1,7 @@
 package dev.dstankovic.musicstore.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +15,12 @@ public class Invoice {
     @Column(name = "InvoiceId", nullable = false)
     private int id;
 
+    @NotNull(message = "Customer is required")
     @ManyToOne
     @JoinColumn(name = "CustomerId")
     private Customer customer;
 
+    @NotNull(message = "Invoice date is required")
     @Column(name = "InvoiceDate", nullable = false)
     private LocalDate invoiceDate;
 
@@ -36,6 +39,7 @@ public class Invoice {
     @Column(name = "BillingPostalCode", length = 10)
     private String billingPostalCode;
 
+    @NotNull(message = "Total is required")
     @Column(name = "Total", nullable = false)
     private double total;
 

@@ -6,8 +6,10 @@ import dev.dstankovic.musicstore.service.CustomerService;
 import dev.dstankovic.musicstore.service.InvoiceService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -42,7 +44,7 @@ public class InvoiceController {
         return "invoices/invoice-form";
     }
 
-    @PostMapping("/showFormForUpdate")
+    @GetMapping("/showFormForUpdate")
     public String showFormForUpdate(@RequestParam("invoiceId") int id, Model model) {
 
         Invoice invoice = invoiceService.findById(id);
@@ -55,9 +57,13 @@ public class InvoiceController {
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute("invoice") Invoice invoice) {
+    public String save(@Valid @ModelAttribute("invoice") Invoice invoice, BindingResult bindingResult) {
 
-        invoiceService.save(invoice);
+        if (bindingResult.hasErrors()) {
+            return "invoices/invoice-form";
+        } else {
+            invoiceService.save(invoice);
+        }
 
         return "redirect:/invoices/list";
     }
