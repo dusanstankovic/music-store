@@ -68,7 +68,7 @@ public class InvoiceController {
         return "redirect:/invoices/list";
     }
 
-    @PostMapping("/delete")
+    @GetMapping("/delete")
     public String delete(@RequestParam("invoiceId") int id) {
 
         invoiceService.deleteById(id);

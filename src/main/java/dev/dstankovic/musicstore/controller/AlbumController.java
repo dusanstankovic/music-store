@@ -68,7 +68,7 @@ public class AlbumController {
         return "redirect:/albums/list";
     }
 
-    @PostMapping("/delete")
+    @GetMapping("/delete")
     public String delete(@RequestParam("albumId") int id) {
 
         albumService.deleteById(id);

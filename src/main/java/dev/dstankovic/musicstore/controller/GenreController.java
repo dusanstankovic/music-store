@@ -58,7 +58,7 @@ public class GenreController {
         return "redirect:/genres/list";
     }
 
-    @PostMapping("/delete")
+    @GetMapping("/delete")
     public String delete(@RequestParam("genreId") int id) {
 
         genreService.deleteById(id);

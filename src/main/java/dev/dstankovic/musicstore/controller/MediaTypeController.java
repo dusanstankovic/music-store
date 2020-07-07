@@ -58,7 +58,7 @@ public class MediaTypeController {
         return "redirect:/mediatypes/list";
     }
 
-    @PostMapping("/delete")
+    @GetMapping("/delete")
     public String delete(@RequestParam("mediatypeId") int id) {
 
         mediaTypeService.deleteById(id);

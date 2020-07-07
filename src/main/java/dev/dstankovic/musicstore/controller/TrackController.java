@@ -88,7 +88,7 @@ public class TrackController {
         return "redirect:/tracks/list";
     }
 
-    @PostMapping("/delete")
+    @GetMapping("/delete")
     public String delete(@RequestParam("trackId") int id) {
 
         trackService.deleteById(id);

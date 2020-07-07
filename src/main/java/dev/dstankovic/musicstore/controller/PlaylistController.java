@@ -62,7 +62,7 @@ public class PlaylistController {
         return "redirect:/playlists/list";
     }
 
-    @PostMapping("/delete")
+    @GetMapping("/delete")
     public String delete(@RequestParam("playlistId") int id) {
 
         playlistService.deleteById(id);

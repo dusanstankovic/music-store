@@ -45,7 +45,7 @@
             </div>
             <div class="col-md-6">
                 <label for="reportsTo" class="form-label">Reports to</label>
-                <select th:field="${employee}" class="form-select" id="reportsTo">
+                <select th:field="${employee.employee}" class="form-select" id="reportsTo">
                     <option th:each="employee : ${employees}" th:value="${employee.id}"
                             th:text="${employee.firstName + ' ' + employee.lastName}"></option>
                 </select>

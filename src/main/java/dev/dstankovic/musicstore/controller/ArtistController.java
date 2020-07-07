@@ -58,7 +58,7 @@ public class ArtistController {
         return "redirect:/artists/list";
     }
 
-    @PostMapping("/delete")
+    @GetMapping("/delete")
     public String delete(@RequestParam("artistId") int id) {
 
         artistService.deleteById(id);
