@@ -11,31 +11,34 @@
 </head>
 <body>
 
-<div class="container-fluid" th:replace="fragments/header :: header">
-    <!-- Header -->
-</div>
+<!-- Header -->
+<div class="container-fluid" th:replace="fragments/header :: header"></div>
+<!-- Header -->
+
+<p class="pb-5"></p>
+<p class="pb-5"></p>
 
 <div class="container">
-    <h3>Media Type details</h3>
-    <hr>
-    <p class="h4 mb-4">Save Media Type</p>
-    <form action="#" th:action="@{/mediatypes/save}" th:object="${mediatype}" method="post">
+    <h3 class="mb-3 pb-3">Employee Form</h3>
+    <form class="pb-5" action="#" th:action="@{/mediatypes/save}" th:object="${mediatype}" method="post">
 
         <!-- add hidden form field to handle update -->
         <input type="hidden" th:field="*{id}" />
 
-        <label>Media type name:</label>
-        <input type="text" th:field="*{name}" class="form-control mb-4 col-4" placeholder="Media Type Name">
-        <span class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"/>
-        <button type="submit" class="btn btn-info col-2">Save</button>
+        <div class="row g-2">
+            <div class="col-md-6">
+                <label for="name" class="form-label">Media type name</label>
+                <input type="text" th:field="*{name}" class="form-control mb-4 col-4" id="name"
+                       placeholder="Media type name">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary col-md-6">Save</button>
     </form>
-    <hr>
-    <a th:href="@{/mediatypes/list}">Back to Media Types list</a>
 </div>
 
-<div class="container-fluid" th:replace="fragments/footer :: footer">
-    <!-- Footer -->
-</div>
+<!-- Footer -->
+<div class="container-fluid" th:replace="fragments/footer :: footer"></div>
+<!-- Footer -->
 
 </body>
 </html>

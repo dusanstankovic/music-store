@@ -92,6 +92,17 @@
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarPlaylistsDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                        Playlists
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarPlaylistsDropdown">
+                        <li><a class="dropdown-item" th:href="@{/playlists/list}">Playlists</a></li>
+                        <li><a class="dropdown-item" th:href="@{/playlists/showFormForAdd}">Add New Playlist</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Playlists report</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarGenresDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                         Genres
                     </a>
@@ -117,10 +128,10 @@
                     <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
                 </li>
             </ul>
-            <form class="d-flex">
-                <input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
+<!--            <form class="d-flex">-->
+<!--                <input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search">-->
+<!--                <button class="btn btn-outline-success" type="submit">Search</button>-->
+<!--            </form>-->
         </div>
     </div>
 </nav>

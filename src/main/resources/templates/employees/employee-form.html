@@ -11,62 +11,112 @@
 </head>
 <body>
 
-<div class="container-fluid" th:replace="fragments/header :: header">
-    <!-- Header -->
-</div>
+<!-- Header -->
+<div class="container-fluid" th:replace="fragments/header :: header"></div>
+<!-- Header -->
+
+<p class="pb-5"></p>
+<p class="pb-5"></p>
 
 <div class="container">
-    <h3>Employee details</h3>
-    <hr>
-    <p class="h4 mb-4">Save Employee</p>
-    <form action="#" th:action="@{/employees/save}" th:object="${employee}" method="post">
+    <h3 class="mb-3 pb-3">Employee Form</h3>
+    <form class="pb-5" action="#" th:action="@{/employees/save}" th:object="${employee}" method="post">
 
         <!-- add hidden form field to handle update -->
         <input type="hidden" th:field="*{id}" />
 
-        <label>First name:</label>
-        <input type="text" th:field="*{firstName}" class="form-control mb-4 col-4" placeholder="First name">
-        <span class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"/>
-        <label>Last name:</label>
-        <input type="text" th:field="*{lastName}" class="form-control mb-4 col-4" placeholder="Last name">
-        <span class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"/>
-        <label>Title:</label>
-        <input type="text" th:field="*{title}" class="form-control mb-4 col-4" placeholder="Title">
-        <label>Reports to:</label>
-        <select th:field="${employee}" class="form-control mb-4 col-4">
-            <option value="0">Reports to:</option>
-            <option th:each="employee : ${employees}" th:value="${employee.id}"
-                    th:text="${employee.firstName + ' ' + employee.lastName}">Employee</option>
-        </select>
-        <label>Birth date:</label>
-        <input type="text" th:field="*{birthDate}" class="form-control mb-4 col-4" placeholder="Birth date">
-        <label>Hire date:</label>
-        <input type="text" th:field="*{hireDate}" class="form-control mb-4 col-4" placeholder="Hire date">
-        <label>Address:</label>
-        <input type="text" th:field="*{address}" class="form-control mb-4 col-4" placeholder="Address">
-        <label>City:</label>
-        <input type="text" th:field="*{city}" class="form-control mb-4 col-4" placeholder="City">
-        <label>State:</label>
-        <input type="text" th:field="*{state}" class="form-control mb-4 col-4" placeholder="State">
-        <label>Country:</label>
-        <input type="text" th:field="*{country}" class="form-control mb-4 col-4" placeholder="Country">
-        <label>Postal code:</label>
-        <input type="text" th:field="*{postalCode}" class="form-control mb-4 col-4" placeholder="Postal code">
-        <label>Phone:</label>
-        <input type="text" th:field="*{phone}" class="form-control mb-4 col-4" placeholder="Phone">
-        <label>Fax:</label>
-        <input type="text" th:field="*{fax}" class="form-control mb-4 col-4" placeholder="Fax">
-        <label>Email:</label>
-        <input type="text" th:field="*{email}" class="form-control mb-4 col-4" placeholder="Email">
-        <button type="submit" class="btn btn-info col-2">Save</button>
+        <div class="row g-2">
+            <div class="col-md-6">
+                <label for="firstName" class="form-label">First name</label>
+                <input type="text" th:field="*{firstName}" class="form-control mb-4 col-4" id="firstName"
+                       placeholder="First name">
+            </div>
+            <div class="col-md-6">
+                <label for="lastName" class="form-label">First name</label>
+                <input type="text" th:field="*{lastName}" class="form-control mb-4 col-4" id="lastName"
+                       placeholder="Last name">
+            </div>
+        </div>
+        <div class="row g-2">
+            <div class="col-md-6">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" th:field="*{title}" class="form-control mb-4 col-4" id="title"
+                       placeholder="Title">
+            </div>
+            <div class="col-md-6">
+                <label for="reportsTo" class="form-label">Reports to</label>
+                <select th:field="${employee}" class="form-select" id="reportsTo">
+                    <option th:each="employee : ${employees}" th:value="${employee.id}"
+                            th:text="${employee.firstName + ' ' + employee.lastName}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="row g-2">
+            <div class="col-md-6">
+                <label for="birthDate" class="form-label">Birth date</label>
+                <input type="date" th:field="*{birthDate}" class="form-control mb-4 col-4" id="birthDate"
+                       placeholder="Birth date">
+            </div>
+            <div class="col-md-6">
+                <label for="hireDate" class="form-label">Hire date</label>
+                <input type="date" th:field="*{hireDate}" class="form-control mb-4 col-4" id="hireDate"
+                       placeholder="Hire date">
+            </div>
+        </div>
+        <div class="row g-2">
+            <div class="col-md-6">
+            <label for="address" class="form-label">Address</label>
+                <input type="text" th:field="*{address}" class="form-control mb-4 col-4" id="address"
+                       placeholder="Address">
+            </div>
+            <div class="col-md-3">
+                <label for="city" class="form-label">City</label>
+                <input type="text" th:field="*{city}" class="form-control mb-4 col-4" id="city"
+                       placeholder="City">
+            </div>
+            <div class="col-md-3">
+                <label for="state" class="form-label">State</label>
+                <input type="text" th:field="*{state}" class="form-control mb-4 col-4" id="state"
+                       placeholder="State">
+            </div>
+        </div>
+        <div class="row g-2">
+            <div class="col-md-6">
+                <label for="country" class="form-label">Country</label>
+                <input type="text" th:field="*{country}" class="form-control mb-4 col-4" id="country"
+                       placeholder="Country">
+            </div>
+            <div class="col-md-6">
+                <label for="postalCode" class="form-label">Postal code</label>
+                <input type="text" th:field="*{postalCode}" class="form-control mb-4 col-4" id="postalCode"
+                       placeholder="Postal code">
+            </div>
+        </div>
+        <div class="row g-2">
+            <div class="col-md-3">
+                <label for="phone" class="form-label">Phone</label>
+                <input type="text" th:field="*{phone}" class="form-control mb-4 col-4" id="phone"
+                       placeholder="Phone">
+            </div>
+            <div class="col-md-3">
+                <label for="fax" class="form-label">Fax</label>
+                <input type="text" th:field="*{fax}" class="form-control mb-4 col-4" id="fax"
+                       placeholder="Fax">
+            </div>
+            <div class="col-md-6">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" th:field="*{email}" class="form-control mb-4 col-4" id="email"
+                       placeholder="Email">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Save</button>
     </form>
-    <hr>
-    <a th:href="@{/employees/list}">Back to Employees list</a>
+<!--    <a th:href="@{/employees/list}">Back to Employees list</a>-->
 </div>
 
-<div class="container-fluid" th:replace="fragments/footer :: footer">
-    <!-- Footer -->
-</div>
+<!-- Footer -->
+<div class="container-fluid" th:replace="fragments/footer :: footer"></div>
+<!-- Footer -->
 
 </body>
 </html>

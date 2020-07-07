@@ -11,53 +11,80 @@
 </head>
 <body>
 
-<div class="container-fluid" th:replace="fragments/header :: header">
-    <!-- Header -->
-</div>
+<!-- Header -->
+<div class="container-fluid" th:replace="fragments/header :: header"></div>
+<!-- Header -->
+
+<p class="pb-5"></p>
+<p class="pb-5"></p>
 
 <div class="container">
-    <h3>Invoice details</h3>
-    <hr>
-    <p class="h4 mb-4">Save Invoice</p>
-    <form action="#" th:action="@{/invoices/save}" th:object="${invoice}" method="post">
+    <h3 class="mb-3 pb-3">Invoice details</h3>
+    <form class="pb-5" action="#" th:action="@{/invoices/save}" th:object="${invoice}" method="post">
 
         <!-- add hidden form field to handle update -->
         <input type="hidden" th:field="*{id}" />
 
-        <label>Customer name:</label>
-        <select th:field="${invoice.customer.id}" class="form-control mb-4 col-4">
-            <option value="0">Select customer:</option>
-            <option th:each="customer : ${customers}" th:value="${customer.id}"
-                    th:text="${customer.firstName + ' ' + customer.lastName}">Customer</option>
-        </select>
-        <span class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('customer.id')}"
-              th:errors="${invoice.customer.id}"/>
-        <label>Invoice date:</label>
-        <input type="text" th:field="*{invoiceDate}" class="form-control mb-4 col-4" placeholder="Invoice Date">
-        <span class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('invoiceDate')}"
-              th:errors="*{invoiceDate}"/>
-        <label>Billing address:</label>
-        <input type="text" th:field="*{billingAddress}" class="form-control mb-4 col-4" placeholder="Billing Address">
-        <label>Billing city:</label>
-        <input type="text" th:field="*{billingCity}" class="form-control mb-4 col-4" placeholder="Billing City">
-        <label>Billing state:</label>
-        <input type="text" th:field="*{billingState}" class="form-control mb-4 col-4" placeholder="Billing State">
-        <label>Billing country:</label>
-        <input type="text" th:field="*{billingCountry}" class="form-control mb-4 col-4" placeholder="Billing Country">
-        <label>Billing postal code:</label>
-        <input type="text" th:field="*{billingPostalCode}" class="form-control mb-4 col-4" placeholder="Billing Postal Code">
-        <label>Total:</label>
-        <input type="text" th:field="*{total}" class="form-control mb-4 col-4" placeholder="Total">
-        <span class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('total')}" th:errors="*{total}"/>
-        <button type="submit" class="btn btn-info col-2">Save</button>
+        <div class="row g-2">
+            <div class="col-md-4">
+                <label for="invoiceNumber" class="form-label">Invoice number</label>
+                <input type="text" th:value="*{id}" class="form-control mb-4 col-4" id="invoiceNumber" readonly>
+            </div>
+            <div class="col-md-4">
+                <label for="invoiceDate" class="form-label">Invoice date</label>
+                <input type="date" th:field="*{invoiceDate}" class="form-control mb-4 col-4" id="invoiceDate">
+            </div>
+            <div class="col-md-4">
+                <label for="customer" class="form-label">Customer</label>
+                <select th:field="${invoice.customer.id}" class="form-select" id="customer">
+                    <option th:each="customer : ${customers}" th:value="${customer.id}"
+                            th:text="${customer.firstName + ' ' + customer.lastName}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="row g-2">
+            <div class="col-md-6">
+                <label for="address" class="form-label">Billing address</label>
+                <input type="text" th:field="*{billingAddress}" class="form-control mb-4 col-4" id="address"
+                       placeholder="Billing address">
+            </div>
+            <div class="col-md-3">
+                <label for="city" class="form-label">Billing city</label>
+                <input type="text" th:field="*{billingCity}" class="form-control mb-4 col-4" id="city"
+                       placeholder="Billing city">
+            </div>
+            <div class="col-md-3">
+                <label for="postalCode" class="form-label">Billing postal code</label>
+                <input type="text" th:field="*{billingPostalCode}" class="form-control mb-4 col-4" id="postalCode"
+                       placeholder="Billing postal code">
+            </div>
+        </div>
+        <div class="row g-2">
+            <div class="col-md-6">
+                <label for="state" class="form-label">Billing state</label>
+                <input type="text" th:field="*{billingState}" class="form-control mb-4 col-4" id="state"
+                       placeholder="Billing state">
+            </div>
+            <div class="col-md-6">
+                <label for="country" class="form-label">Billing country</label>
+                <input type="text" th:field="*{billingCountry}" class="form-control mb-4 col-4" id="country"
+                       placeholder="Billing country">
+            </div>
+        </div>
+        <div class="row g-2">
+            <div class="col-md-6">
+                <label for="total" class="form-label">Invoice total</label>
+                <input type="number" th:field="*{total}" class="form-control mb-4 col-4" id="total"
+                       placeholder="Invoice total">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Save</button>
     </form>
-    <hr>
-    <a th:href="@{/invoices/list}">Back to Invoices list</a>
 </div>
 
-<div class="container-fluid" th:replace="fragments/footer :: footer">
-    <!-- Footer -->
-</div>
+<!-- Footer -->
+<div class="container-fluid" th:replace="fragments/footer :: footer"></div>
+<!-- Footer -->
 
 </body>
 </html>

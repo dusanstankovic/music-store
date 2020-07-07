@@ -11,29 +11,34 @@
 </head>
 <body>
 
-<div class="container-fluid" th:replace="fragments/header :: header">
-    <!-- Header -->
-</div>
+<!-- Header -->
+<div class="container-fluid" th:replace="fragments/header :: header"></div>
+<!-- Header -->
+
+<p class="pb-5"></p>
+<p class="pb-5"></p>
 
 <div class="container">
-    <h3>Playlist details</h3>
-    <hr>
-    <p class="h4 mb-4">Save Playlist</p>
-    <form action="#" th:action="@{/playlists/save}" th:object="${playlist}" method="post">
+    <h3 class="mb-3 pb-3">Playlist Form</h3>
+    <form class="pb-5"  action="#" th:action="@{/playlists/save}" th:object="${playlist}" method="post">
 
         <!-- add hidden form field to handle update -->
         <input type="hidden" th:field="*{id}" />
 
-        <input type="text" th:field="*{name}" class="form-control mb-4 col-4" placeholder="Playlist name">
-        <button type="submit" class="btn btn-info col-2">Save</button>
+        <div class="row g-2">
+            <div class="col-md-6">
+                <label for="name" class="form-label">Playlist name</label>
+                <input type="text" th:field="*{name}" class="form-control mb-4 col-4" id="name"
+                       placeholder="Playlist name">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Save</button>
     </form>
-    <hr>
-    <a th:href="@{/playlists/list}">Back to Playlists</a>
 </div>
 
-<div class="container-fluid" th:replace="fragments/footer :: footer">
-    <!-- Footer -->
-</div>
+<!-- Footer -->
+<div class="container-fluid" th:replace="fragments/footer :: footer"></div>
+<!-- Footer -->
 
 </body>
 </html>

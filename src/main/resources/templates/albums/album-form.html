@@ -11,38 +11,42 @@
 </head>
 <body>
 
-<div class="container-fluid" th:replace="fragments/header :: header">
-    <!-- Header -->
-</div>
+<!-- Header -->
+<div class="container-fluid" th:replace="fragments/header :: header"></div>
+<!-- Header -->
+
+<p class="pb-5"></p>
+<p class="pb-5"></p>
 
 <div class="container">
-    <h3>Album details</h3>
-    <hr>
-    <p class="h4 mb-4">Save Album</p>
-    <form action="#" th:action="@{/albums/save}" th:object="${album}" method="post">
+    <h3 class="mb-3 pb-3">Album Form</h3>
+
+    <form class="pb-5" action="#" th:action="@{/albums/save}" th:object="${album}" method="post">
 
         <!-- add hidden form field to handle update -->
         <input type="hidden" th:field="*{id}" />
 
-        <label>Album Title:</label>
-        <input type="text" th:field="*{title}" class="form-control mb-4 col-4" placeholder="Album title">
-        <span class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"/>
-        <label>Artist:</label>
-        <select th:field="${album.artist.id}" class="form-control mb-4 col-4">
-            <option value="0">Select artist:</option>
-            <option th:each="artist : ${artists}" th:value="${artist.id}" th:text="${artist.name}">Artist</option>
-        </select>
-        <span class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('artist.id')}"
-              th:errors="*{artist.id}"/>
-        <button type="submit" class="btn btn-info col-2">Save</button>
+        <div class="row g-2">
+            <div class="col-md-6">
+                <label for="title" class="form-label">Album title</label>
+                <input type="text" th:field="*{title}" class="form-control mb-4 col-4" id="title"
+                       placeholder="Album title">
+            </div>
+            <div class="col-md-6">
+                <label for="artist" class="form-label">Artist</label>
+                <select th:field="${album.artist.id}" class="form-select" id="artist">
+                    <option th:each="artist : ${artists}" th:value="${artist.id}"
+                            th:text="${artist.name}"></option>
+                </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Save</button>
     </form>
-    <hr>
-    <a th:href="@{/albums/list}">Back to Albums list</a>
 </div>
 
-<div class="container-fluid" th:replace="fragments/footer :: footer">
-    <!-- Footer -->
-</div>
+<!-- Footer -->
+<div class="container-fluid" th:replace="fragments/footer :: footer"></div>
+<!-- Footer -->
 
 </body>
 </html>

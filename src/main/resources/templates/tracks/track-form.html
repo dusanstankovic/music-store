@@ -11,61 +11,79 @@
 </head>
 <body>
 
-<div class="container-fluid" th:replace="fragments/header :: header">
-    <!-- Header -->
-</div>
+<!-- Header -->
+<div class="container-fluid" th:replace="fragments/header :: header"></div>
+<!-- Header -->
+
+<p class="pb-5"></p>
+<p class="pb-5"></p>
 
 <div class="container">
-    <h3>Track details</h3>
-    <hr>
-    <p class="h4 mb-4">Save Track</p>
-    <form action="#" th:action="@{/tracks/save}" th:object="${track}" method="post">
+    <h3 class="mb-3 pb-3">Track Form</h3>
+    <form class="pb-5"  action="#" th:action="@{/tracks/save}" th:object="${track}" method="post">
 
         <!-- add hidden form field to handle update -->
         <input type="hidden" th:field="*{id}" />
 
-        <label>Track name:</label>
-        <input type="text" th:field="*{name}" class="form-control mb-4 col-4" placeholder="Track name">
-        <span class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"/>
-        <label>Album:</label>
-        <select th:field="${track.album.id}" class="form-control mb-4 col-4">
-            <option value="0">Select album:</option>
-            <option th:each="album : ${albums}" th:value="${album.id}" th:text="${album.title}">Album</option>
-        </select>
-        <label>Media type:</label>
-        <select th:field="${track.mediaType.id}" class="form-control mb-4 col-4">
-            <option value="0">Select media type:</option>
-            <option th:each="mediatype : ${mediatypes}" th:value="${mediatype.id}"
-                    th:text="${mediatype.name}">Media Type</option>
-        </select>
-        <span class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('mediatype')}"
-              th:errors="*{mediaType}"/>
-        <label>Genre:</label>
-        <select th:field="${track.genre.id}" class="form-control mb-4 col-4">
-            <option value="0">Select genre:</option>
-            <option th:each="genre : ${genres}" th:value="${genre.id}" th:text="${genre.name}">Genre</option>
-        </select>
-        <label>Composer:</label>
-        <input type="text" th:field="*{composer}" class="form-control mb-4 col-4" placeholder="Composer">
-        <label>Length in milliseconds:</label>
-        <input type="text" th:field="*{milliseconds}" class="form-control mb-4 col-4" placeholder="0">
-        <span class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('milliseconds')}"
-              th:errors="*{milliseconds}"/>
-        <label>Size in bytes:</label>
-        <input type="text" th:field="*{bytes}" class="form-control mb-4 col-4" placeholder="0">
-        <label>Unit price:</label>
-        <input type="text" th:field="*{unitPrice}" class="form-control mb-4 col-4" placeholder="0.00">
-        <span class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('unitPrice')}"
-              th:errors="*{unitPrice}" />
-        <button type="submit" class="btn btn-info col-2">Save</button>
+        <div class="row g-2">
+            <div class="col-md-6">
+                <label for="trackName" class="form-label">Track name</label>
+                <input type="text" th:field="*{name}" class="form-control mb-4 col-4" id="trackName"
+                       placeholder="Track name">
+            </div>
+            <div class="col-md-6">
+                <label for="album" class="form-label">Album</label>
+                <select th:field="${track.album.id}" class="form-select" id="album">
+                    <option th:each="album : ${albums}" th:value="${album.id}" th:text="${album.title}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="row g-2">
+            <div class="col-md-6">
+                <label for="mediaType" class="form-label">Media type</label>
+                <select th:field="${track.mediaType.id}" class="form-select" id="mediaType">
+                    <option th:each="mediatype : ${mediatypes}" th:value="${mediatype.id}" th:text="${mediatype.name}">
+                    </option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="genre" class="form-label">Genre</label>
+                <select th:field="${track.genre.id}" class="form-select" id="genre">
+                    <option th:each="genre : ${genres}" th:value="${genre.id}" th:text="${genre.name}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="row g-2">
+            <div class="col-md-6">
+                <label for="composer" class="form-label">Composer</label>
+                <input type="text" th:field="*{composer}" class="form-control mb-4 col-4" id="composer"
+                       placeholder="Composer name">
+            </div>
+            <div class="col-md-3">
+                <label for="length" class="form-label">Track length in milliseconds</label>
+                <input type="number" th:field="*{milliseconds}" class="form-control mb-4 col-4" id="length"
+                       placeholder="0">
+            </div>
+            <div class="col-md-3">
+                <label for="size" class="form-label">Track size in bytes</label>
+                <input type="number" th:field="*{bytes}" class="form-control mb-4 col-4" id="size"
+                       placeholder="0">
+            </div>
+        </div>
+        <div class="row g-2">
+            <div class="col-md-6">
+                <label for="price" class="form-label">Unit price</label>
+                <input type="number" th:field="*{unitPrice}" class="form-control mb-4 col-4" id="price"
+                       placeholder="0.00">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Save</button>
     </form>
-    <hr>
-    <a th:href="@{/tracks/list}">Back to Track list</a>
 </div>
 
-<div class="container-fluid" th:replace="fragments/footer :: footer">
-    <!-- Footer -->
-</div>
+<!-- Footer -->
+<div class="container-fluid" th:replace="fragments/footer :: footer"></div>
+<!-- Footer -->
 
 </body>
 </html>
