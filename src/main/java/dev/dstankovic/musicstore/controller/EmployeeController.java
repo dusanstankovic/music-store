@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
+@ControllerAdvice
 @RequestMapping("/employees")
 public class EmployeeController {
 
@@ -23,7 +24,9 @@ public class EmployeeController {
     @GetMapping("/list")
     public String listEmployees(Model model) {
 
-        model.addAttribute("employees", employeeService.findAll());
+        List<Employee> employees = employeeService.findAll();
+
+        model.addAttribute("employees", employees);
 
         return "employees/list-employees";
     }
@@ -34,20 +37,14 @@ public class EmployeeController {
         Employee employee = new Employee();
         model.addAttribute("employee", employee);
 
-        List<Employee> employees = employeeService.findAll();
-        model.addAttribute("employees", employees);
-
         return "employees/employee-form";
     }
 
     @GetMapping("/showFormForUpdate")
-    public String showFormForUpdate(@RequestParam("employeeId") int id, Model model) {
+    public String showFormForUpdate(@RequestParam("employeeId") int employeeId, Model model) {
 
-        Employee employee = employeeService.findById(id);
+        Employee employee = employeeService.findById(employeeId);
         model.addAttribute("employee", employee);
-
-        List<Employee> employees = employeeService.findAll();
-        model.addAttribute("employees", employees);
 
         return "employees/employee-form";
     }
@@ -56,19 +53,27 @@ public class EmployeeController {
     public String save(@Valid @ModelAttribute("employee") Employee employee, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
+
             return "employees/employee-form";
-        } else {
-            employeeService.save(employee);
         }
+
+        employeeService.save(employee);
 
         return "redirect:/employees/list";
     }
 
     @GetMapping("/delete")
-    public String delete(@RequestParam("employeeId") int id) {
+    public String delete(@RequestParam("employeeId") int employeeId) {
 
-        employeeService.deleteById(id);
+        employeeService.deleteById(employeeId);
 
         return "redirect:/employees/list";
+    }
+
+    @ModelAttribute
+    public void addEmployeesForDropdownList(Model model) {
+
+        List<Employee> employees = employeeService.findAll();
+        model.addAttribute("employees", employees);
     }
 }

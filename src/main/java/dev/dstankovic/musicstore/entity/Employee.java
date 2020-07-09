@@ -1,10 +1,13 @@
 package dev.dstankovic.musicstore.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,34 +19,35 @@ public class Employee {
     @Column(name = "EmployeeId", nullable = false)
     private int id;
 
-    @NotNull(message = "Last name is required")
-    @Size(min = 1, message = "Last name must contain one or more characters")
-    @Column(name = "LastName", length = 20, nullable = false)
-    private String lastName;
-
-    @NotNull(message = "First name is required")
-    @Size(min = 1, message = "First name must contain one or more characters")
+    @NotBlank(message = "First name is required")
     @Column(name = "FirstName", length = 20, nullable = false)
     private String firstName;
+
+    @NotBlank(message = "Last name is required")
+    @Column(name = "LastName", length = 20, nullable = false)
+    private String lastName;
 
     @Column(name = "Title", length = 30)
     private String title;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ReportsTo")
-    private Employee employee;
+    private Employee reportsTo;
 
-    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY,
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @OneToMany(mappedBy = "reportsTo", fetch = FetchType.LAZY)
     private List<Employee> employees;
 
     @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     private List<Customer> customers;
 
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @Past(message = "Invalid date")
     @Column(name = "BirthDate")
     private LocalDate birthDate;
 
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @PastOrPresent(message = "Date must be today or in the past")
     @Column(name = "HireDate")
     private LocalDate hireDate;
 
@@ -62,33 +66,37 @@ public class Employee {
     @Column(name = "PostalCode", length = 10)
     private String postalCode;
 
+    @Pattern(regexp = "^|\\s*(?:\\+?(\\d{1,3}))?([-. (]*(\\d{3})[-. )]*)?((\\d{3})[-. ]*(\\d{2,4})(?:[-.x ]*(\\d+))?)\\s*$", message = "Incorrect phone number format")
     @Column(name = "Phone", length = 24)
     private String phone;
 
+    @Pattern(regexp = "^|\\s*(?:\\+?(\\d{1,3}))?([-. (]*(\\d{3})[-. )]*)?((\\d{3})[-. ]*(\\d{2,4})(?:[-.x ]*(\\d+))?)\\s*$", message = "Incorrect fax number format")
     @Column(name = "Fax", length = 24)
     private String fax;
 
+    @Pattern(regexp = "|[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message = "Incorrect email address")
     @Column(name = "Email", length = 60)
     private String email;
-
     public Employee() {
     }
 
-    public Employee(String lastName,
-                    String firstName,
+    public Employee(int id,
+                    @NotBlank(message = "First name is required") String firstName,
+                    @NotBlank(message = "Last name is required") String lastName,
                     String title,
-                    LocalDate birthDate,
-                    LocalDate hireDate,
+                    @Past(message = "Invalid date") LocalDate birthDate,
+                    @PastOrPresent(message = "Date must be today or in the past") LocalDate hireDate,
                     String address,
                     String city,
                     String state,
                     String country,
                     String postalCode,
-                    String phone,
-                    String fax,
-                    String email) {
-        this.lastName = lastName;
+                    @Pattern(regexp = "^|\\s*(?:\\+?(\\d{1,3}))?([-. (]*(\\d{3})[-. )]*)?((\\d{3})[-. ]*(\\d{2,4})(?:[-.x ]*(\\d+))?)\\s*$", message = "Incorrect phone number format") String phone,
+                    @Pattern(regexp = "^|\\s*(?:\\+?(\\d{1,3}))?([-. (]*(\\d{3})[-. )]*)?((\\d{3})[-. ]*(\\d{2,4})(?:[-.x ]*(\\d+))?)\\s*$", message = "Incorrect fax number format") String fax,
+                    @Pattern(regexp = "|[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message = "Incorrect email address") String email) {
+        this.id = id;
         this.firstName = firstName;
+        this.lastName = lastName;
         this.title = title;
         this.birthDate = birthDate;
         this.hireDate = hireDate;
@@ -110,20 +118,20 @@ public class Employee {
         this.id = id;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     public String getFirstName() {
         return firstName;
     }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getTitle() {
@@ -134,12 +142,12 @@ public class Employee {
         this.title = title;
     }
 
-    public Employee getEmployee() {
-        return employee;
+    public Employee getReportsTo() {
+        return reportsTo;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setReportsTo(Employee reportsTo) {
+        this.reportsTo = reportsTo;
     }
 
     public List<Employee> getEmployees() {
@@ -238,30 +246,12 @@ public class Employee {
         this.email = email;
     }
 
-    // convenience method for bi-directional relationship
-    public void addEmployee(Employee employee) {
-        if (employees == null) {
-            employees = new ArrayList<>();
-        }
-        employees.add(employee);
-        employee.setEmployee(this);
-    }
-
-    // convenience method for bi-directional relationship
-    public void addCustomer(Customer customer) {
-        if (customers == null) {
-            customers = new ArrayList<>();
-        }
-        customers.add(customer);
-        customer.setEmployee(this);
-    }
-
     @Override
     public String toString() {
         return "Employee{" +
                 "id=" + id +
-                ", lastName='" + lastName + '\'' +
                 ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", title='" + title + '\'' +
                 ", birthDate=" + birthDate +
                 ", hireDate=" + hireDate +

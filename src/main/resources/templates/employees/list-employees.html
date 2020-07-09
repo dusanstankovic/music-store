@@ -31,13 +31,13 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="employee : ${employees}" th:onclick="|location.href='@{/employees/showFormForUpdate(employeeId=${employee.id})}'|">
+        <tr th:each="employee : ${employees}">
             <td><a th:text="${employee.id}" th:href="@{/employees/showFormForUpdate(employeeId=${employee.id})}"
                    class="text-decoration-none" /></td>
             <td th:text="${employee.firstName}"/>
             <td th:text="${employee.lastName}"/>
             <td th:text="${employee.title}"/>
-            <td th:text="${employee.employee?.firstName}"/>
+            <td th:text="${employee.reportsTo?.firstName}" />
             <td>
                 <!-- update button -->
                 <a th:href="@{/employees/showFormForUpdate(employeeId=${employee.id})}" class="btn btn-info btn-sm">Update</a>
