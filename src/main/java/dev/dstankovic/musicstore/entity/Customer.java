@@ -2,9 +2,8 @@ package dev.dstankovic.musicstore.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.util.ArrayList;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 
 @Entity
@@ -16,13 +15,11 @@ public class Customer {
     @Column(name = "CustomerId")
     private int id;
 
-    @NotNull(message = "First name is required")
-    @Size(min = 1, message = "First name must contain one or more characters")
+    @NotBlank(message = "First name is required")
     @Column(name = "FirstName", length = 40, nullable = false)
     private String firstName;
 
-    @NotNull(message = "Last name is required")
-    @Size(min = 1, message = "Last name must contain one or more characters")
+    @NotBlank(message = "Last name is required")
     @Column(name = "LastName", length = 20, nullable = false)
     private String lastName;
 
@@ -44,13 +41,14 @@ public class Customer {
     @Column(name = "PostalCode", length = 10)
     private String postalCode;
 
+    @Pattern(regexp = "^|\\s*(?:\\+?(\\d{1,3}))?([-. (]*(\\d{3})[-. )]*)?((\\d{3})[-. ]*(\\d{2,4})(?:[-.x ]*(\\d+))?)\\s*$", message = "Incorrect phone number format")
     @Column(name = "Phone", length = 24)
     private String phone;
 
+    @Pattern(regexp = "^|\\s*(?:\\+?(\\d{1,3}))?([-. (]*(\\d{3})[-. )]*)?((\\d{3})[-. ]*(\\d{2,4})(?:[-.x ]*(\\d+))?)\\s*$", message = "Incorrect fax number format")
     @Column(name = "Fax",length = 24)
     private String fax;
 
-    @NotNull(message = "Email is required")
     @Email(message = "Email must be valid")
     @Column(name = "Email", length = 60, nullable = false)
     private String email;
@@ -66,17 +64,17 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(String firstName,
-                    String lastName,
+    public Customer(@NotBlank(message = "First name is required") String firstName,
+                    @NotBlank(message = "Last name is required") String lastName,
                     String company,
                     String address,
                     String city,
                     String state,
                     String country,
                     String postalCode,
-                    String phone,
-                    String fax,
-                    String email) {
+                    @Pattern(regexp = "^|\\s*(?:\\+?(\\d{1,3}))?([-. (]*(\\d{3})[-. )]*)?((\\d{3})[-. ]*(\\d{2,4})(?:[-.x ]*(\\d+))?)\\s*$", message = "Incorrect phone number format") String phone,
+                    @Pattern(regexp = "^|\\s*(?:\\+?(\\d{1,3}))?([-. (]*(\\d{3})[-. )]*)?((\\d{3})[-. ]*(\\d{2,4})(?:[-.x ]*(\\d+))?)\\s*$", message = "Incorrect fax number format") String fax,
+                    @Email(message = "Email must be valid") String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.company = company;
@@ -200,15 +198,6 @@ public class Customer {
 
     public void setInvoices(List<Invoice> invoices) {
         this.invoices = invoices;
-    }
-
-    // convenience method for bi-directional relationship
-    public void addInvoice(Invoice invoice) {
-        if (invoices == null) {
-            invoices = new ArrayList<>();
-        }
-        invoices.add(invoice);
-        invoice.setCustomer(this);
     }
 
     @Override

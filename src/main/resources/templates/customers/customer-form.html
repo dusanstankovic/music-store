@@ -23,18 +23,22 @@
     <form class="pb-5" action="#" th:action="@{/customers/save}" th:object="${customer}" method="post">
 
         <!-- add hidden form field to handle update -->
-        <input type="hidden" th:field="*{id}" />
+        <input type="hidden" th:field="*{id}"/>
 
         <div class="row g-2">
             <div class="col-md-6">
                 <label for="firstName" class="form-label">First name</label>
                 <input type="text" th:field="*{firstName}" class="form-control mb-4 col-4" id="firstName"
                        placeholder="First name">
+                <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="alert alert-danger"
+                     role="alert"></div>
             </div>
             <div class="col-md-6">
                 <label for="lastName" class="form-label">First name</label>
                 <input type="text" th:field="*{lastName}" class="form-control mb-4 col-4" id="lastName"
                        placeholder="Last name">
+                <div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="alert alert-danger"
+                     role="alert"></div>
             </div>
         </div>
         <div class="row g-2">
@@ -76,28 +80,37 @@
                 <label for="phone" class="form-label">Phone</label>
                 <input type="text" th:field="*{phone}" class="form-control mb-4 col-4" id="phone"
                        placeholder="Phone">
+                <div th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" class="alert alert-danger"
+                     role="alert"></div>
             </div>
             <div class="col-md-3">
                 <label for="fax" class="form-label">Fax</label>
                 <input type="text" th:field="*{fax}" class="form-control mb-4 col-4" id="fax"
                        placeholder="Fax">
+                <div th:if="${#fields.hasErrors('fax')}" th:errors="*{fax}" class="alert alert-danger"
+                     role="alert"></div>
             </div>
             <div class="col-md-3">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" th:field="*{email}" class="form-control mb-4 col-4" id="email"
                        placeholder="Email">
+                <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="alert alert-danger"
+                     role="alert"></div>
             </div>
         </div>
         <div class="row g-2">
             <div class="col-md-6">
                 <label for="customerRep" class="form-label">Customer representative</label>
                 <select th:field="${customer.employee.id}" class="form-select" id="customerRep">
+                    <option value="0" disabled>Select...</option>
                     <option th:each="employee : ${employees}" th:value="${employee.id}"
                             th:text="${employee.firstName + ' ' + employee.lastName}"></option>
                 </select>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary btn-block">Save</button>
+        <div class="col-md-12 pt-2">
+            <button type="submit" class="btn btn-primary btn-block">Save</button>
+        </div>
     </form>
 </div>
 
