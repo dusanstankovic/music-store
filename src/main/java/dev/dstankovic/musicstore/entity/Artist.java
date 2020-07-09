@@ -1,8 +1,7 @@
 package dev.dstankovic.musicstore.entity;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Entity
@@ -14,8 +13,7 @@ public class Artist {
     @Column(name = "ArtistId", nullable = false)
     private int id;
 
-    @NotNull(message = "Artist name is required")
-    @Size(min = 1, message = "Artist name must contain one or more characters")
+    @NotBlank(message = "Artist name is required")
     @Column(name = "Name", length = 120)
     private String name;
 
@@ -25,7 +23,7 @@ public class Artist {
     public Artist() {
     }
 
-    public Artist(String name) {
+    public Artist(@NotBlank(message = "Artist name is required") String name) {
         this.name = name;
     }
 
@@ -56,8 +54,7 @@ public class Artist {
     @Override
     public String toString() {
         return "Artist{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "name='" + name + '\'' +
                 '}';
     }
 }
