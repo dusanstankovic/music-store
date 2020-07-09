@@ -1,9 +1,8 @@
 package dev.dstankovic.musicstore.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,12 +14,11 @@ public class Album {
     @Column(name = "albumId", nullable = false)
     private int id;
 
-    @NotNull(message = "Album title is required")
-    @Size(min = 1, message = "Album title must contain one or more characters")
+    @NotBlank(message = "Album title is required")
     @Column(name = "Title", length = 160, nullable = false)
     private String title;
 
-    @NotNull(message = "Please select artist")
+    @NotNull(message = "Artist is required")
     @ManyToOne
     @JoinColumn(name = "ArtistId")
     private Artist artist;
@@ -31,7 +29,7 @@ public class Album {
     public Album() {
     }
 
-    public Album(String title) {
+    public Album(@NotNull(message = "Album title is required") String title) {
         this.title = title;
     }
 
@@ -65,15 +63,6 @@ public class Album {
 
     public void setTracks(List<Track> tracks) {
         this.tracks = tracks;
-    }
-
-    // convenience method for bi-directional relationship
-    public void addTrack(Track track) {
-        if (tracks == null) {
-            tracks = new ArrayList<>();
-        }
-        tracks.add(track);
-        track.setAlbum(this);
     }
 
     @Override

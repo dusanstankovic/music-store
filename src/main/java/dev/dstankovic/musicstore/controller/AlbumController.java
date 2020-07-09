@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
+@ControllerAdvice
 @RequestMapping("/albums")
 public class AlbumController {
 
@@ -38,9 +39,6 @@ public class AlbumController {
         Album album = new Album();
         model.addAttribute("album", album);
 
-        List<Artist> artists = artistService.findAll();
-        model.addAttribute("artists", artists);
-
         return "albums/album-form";
     }
 
@@ -50,9 +48,6 @@ public class AlbumController {
         Album album = albumService.findById(id);
         model.addAttribute("album", album);
 
-        List<Artist> artists = artistService.findAll();
-        model.addAttribute("artists", artists);
-
         return "albums/album-form";
     }
 
@@ -60,10 +55,11 @@ public class AlbumController {
     public String save(@Valid @ModelAttribute("album") Album album, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
+
             return "albums/album-form";
-        } else {
-            albumService.save(album);
         }
+
+        albumService.save(album);
 
         return "redirect:/albums/list";
     }
@@ -74,6 +70,13 @@ public class AlbumController {
         albumService.deleteById(id);
 
         return "redirect:/albums/list";
+    }
+
+    @ModelAttribute
+    public void addArtistsForDropdownList(Model model) {
+
+        List<Artist> artists = artistService.findAll();
+        model.addAttribute("artists", artists);
     }
 
 }

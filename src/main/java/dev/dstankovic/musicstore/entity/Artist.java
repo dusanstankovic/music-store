@@ -3,7 +3,6 @@ package dev.dstankovic.musicstore.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -52,15 +51,6 @@ public class Artist {
 
     public void setAlbums(List<Album> albums) {
         this.albums = albums;
-    }
-
-    // convenience method for bi-directional relationship
-    public void addAlbum(Album album) {
-        if (albums == null) {
-            albums = new ArrayList<>();
-        }
-        albums.add(album);
-        album.setArtist(this);
     }
 
     @Override

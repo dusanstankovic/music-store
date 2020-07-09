@@ -20,27 +20,35 @@
 
 <div class="container">
     <h3 class="mb-3 pb-3">Album Form</h3>
-
     <form class="pb-5" action="#" th:action="@{/albums/save}" th:object="${album}" method="post">
 
         <!-- add hidden form field to handle update -->
-        <input type="hidden" th:field="*{id}" />
+        <input type="hidden" th:field="*{id}"/>
 
         <div class="row g-2">
             <div class="col-md-6">
                 <label for="title" class="form-label">Album title</label>
                 <input type="text" th:field="*{title}" class="form-control mb-4 col-4" id="title"
                        placeholder="Album title">
+                <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="alert alert-danger"
+                     role="alert"></div>
             </div>
             <div class="col-md-6">
                 <label for="artist" class="form-label">Artist</label>
-                <select th:field="${album.artist.id}" class="form-select" id="artist">
-                    <option th:each="artist : ${artists}" th:value="${artist.id}"
-                            th:text="${artist.name}"></option>
+                <select th:field="*{artist.id}" class="form-select" id="artist">
+                    <option value="0" disabled>Select...</option>
+                    <option th:each="art : ${artists}"
+                            th:value="${art.id}"
+                            th:text="${art.name}">
+                    </option>
                 </select>
+                <div th:if="${#fields.hasErrors('artist')}" th:errors="*{artist}" class="alert alert-danger"
+                     role="alert"></div>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary btn-block">Save</button>
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-primary btn-block">Save</button>
+        </div>
     </form>
 </div>
 
