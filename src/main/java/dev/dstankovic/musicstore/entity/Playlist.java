@@ -1,7 +1,7 @@
 package dev.dstankovic.musicstore.entity;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 @Entity
@@ -13,6 +13,7 @@ public class Playlist {
     @Column(name = "PlaylistId", nullable = false)
     private int id;
 
+    @NotEmpty(message = "Playlist name must be provided")
     @Column(name = "Name", length = 120)
     private String name;
 
@@ -26,7 +27,7 @@ public class Playlist {
     public Playlist() {
     }
 
-    public Playlist(String name) {
+    public Playlist(@NotEmpty(message = "Playlist name must be provided") String name) {
         this.name = name;
     }
 
@@ -54,19 +55,10 @@ public class Playlist {
         this.tracks = tracks;
     }
 
-    // convenience method for bi-directional relationship
-    public void addTrack(Track track) {
-        if (tracks == null) {
-            tracks = new ArrayList<>();
-        }
-        tracks.add(track);
-    }
-
     @Override
     public String toString() {
         return "Playlist{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "name='" + name + '\'' +
                 '}';
     }
 }

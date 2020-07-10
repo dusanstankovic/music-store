@@ -6,11 +6,14 @@ import dev.dstankovic.musicstore.service.PlaylistService;
 import dev.dstankovic.musicstore.service.TrackService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
+@ControllerAdvice
 @RequestMapping("/playlists")
 public class PlaylistController {
 
@@ -36,9 +39,6 @@ public class PlaylistController {
         Playlist playlist = new Playlist();
         model.addAttribute("playlist", playlist);
 
-        List<Track> tracks = trackService.findAll();
-        model.addAttribute("tracks", tracks);
-
         return "playlists/playlist-form";
     }
 
@@ -48,15 +48,17 @@ public class PlaylistController {
         Playlist playlist = playlistService.findById(id);
         model.addAttribute("playlist", playlist);
 
-        List<Track> tracks = trackService.findAll();
-        model.addAttribute("tracks", tracks);
-
         return "playlists/playlist-form";
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute("playlist") Playlist playlist) {
+    public String save(@Valid @ModelAttribute("playlist") Playlist playlist, BindingResult bindingResult) {
 
+        if (bindingResult.hasErrors()) {
+
+            return "playlists/playlist-form";
+        }
+        
         playlistService.save(playlist);
 
         return "redirect:/playlists/list";
@@ -68,5 +70,13 @@ public class PlaylistController {
         playlistService.deleteById(id);
 
         return "redirect:/playlists/list";
+    }
+
+    @ModelAttribute
+    public void addTracksForDropdownList(Model model) {
+
+        List<Track> tracks = trackService.findAll();
+        model.addAttribute("tracks", tracks);
+
     }
 }
