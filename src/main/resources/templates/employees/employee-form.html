@@ -15,11 +15,15 @@
 <div class="container-fluid" th:replace="fragments/header :: header"></div>
 <!-- Header -->
 
-<p class="pb-5"></p>
-<p class="pb-5"></p>
-
 <div class="container">
-    <h3 class="mb-3 pb-3">Employee Form</h3>
+
+    <div class="row mt-5"></div>
+    <div class="row mt-5"></div>
+
+    <h3 class="font-weight-light text-uppercase">Employee Details</h3>
+
+    <hr />
+
     <form class="pb-5" action="#" th:action="@{/employees/save}" th:object="${employee}" method="post">
 
         <!-- add hidden form field to handle update -->

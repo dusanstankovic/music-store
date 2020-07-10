@@ -11,34 +11,37 @@
 </head>
 <body>
 
-<div class="container-fluid" th:replace="fragments/header :: header">
-    <!-- Header -->
-</div>
+<!-- Header -->
+<div class="container-fluid" th:replace="fragments/header :: header"></div>
+<!-- Header -->
 
 <div class="container">
-    <h3>List of Tracks</h3>
-    <hr>
-    <a th:href="@{/tracks/showFormForAdd}" class="btn btn-primary btn-sm mb-3">Add Track</a>
-    <table class="table table-striped table-hover">
-        <thead>
+
+    <div class="row mt-5"></div>
+    <div class="row mt-5"></div>
+
+    <h3 class="font-weight-light text-uppercase mb-3">Track List</h3>
+
+    <table class="table table-secondary table-striped">
+        <thead class="table-dark">
         <tr>
-            <th>#</th>
-            <th>Track name</th>
-            <th>Album title</th>
-            <th>Length (ms)</th>
-            <th>Size (bytes)</th>
-            <th>Unit price</th>
-            <th>Action</th>
+            <th scope="col">#</th>
+            <th scope="col">Track name</th>
+            <th scope="col">Album title</th>
+            <th scope="col">Length (ms)</th>
+            <th scope="col">Size (bytes)</th>
+            <th scope="col">Unit price</th>
+            <th scope="col">Action</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="track : ${tracks}">
-            <td th:text="${track.id}" />
-            <td th:text="${track.name}"/>
-            <td th:text="${track.album.title}"/>
-            <td th:text="${track.milliseconds}"/>
-            <td th:text="${track.bytes}"/>
-            <td th:text="${track.unitPrice}"/>
+            <td th:text="${track.id}"></td>
+            <td th:text="${track.name}"></td>
+            <td th:text="${track.album.title}"></td>
+            <td th:text="${track.milliseconds}"></td>
+            <td th:text="${track.bytes}"></td>
+            <td th:text="${track.unitPrice}"></td>
             <td>
                 <!-- update button -->
                 <a th:href="@{/tracks/showFormForUpdate(trackId=${track.id})}" class="btn btn-info btn-sm">Update</a>
@@ -52,9 +55,12 @@
     </table>
 </div>
 
-<div class="container-fluid" th:replace="fragments/footer :: footer">
-    <!-- Footer -->
-</div>
+<div class="row mt-5"></div>
+<div class="row mt-5"></div>
+
+<!-- Footer -->
+<div class="container-fluid" th:replace="fragments/footer :: footer"></div>
+<!-- Footer -->
 
 </body>
 </html>
