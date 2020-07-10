@@ -50,10 +50,11 @@ public class MediaTypeController {
     public String save(@Valid @ModelAttribute("mediatype") MediaType mediaType, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
+
             return "mediatypes/media-type-form";
-        } else {
-            mediaTypeService.save(mediaType);
         }
+
+        mediaTypeService.save(mediaType);
 
         return "redirect:/mediatypes/list";
     }

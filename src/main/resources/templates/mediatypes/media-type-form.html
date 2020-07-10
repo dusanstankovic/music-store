@@ -19,7 +19,7 @@
 <p class="pb-5"></p>
 
 <div class="container">
-    <h3 class="mb-3 pb-3">Employee Form</h3>
+    <h3 class="mb-3 pb-3">Media Type Form</h3>
     <form class="pb-5" action="#" th:action="@{/mediatypes/save}" th:object="${mediatype}" method="post">
 
         <!-- add hidden form field to handle update -->
@@ -30,9 +30,13 @@
                 <label for="name" class="form-label">Media type name</label>
                 <input type="text" th:field="*{name}" class="form-control mb-4 col-4" id="name"
                        placeholder="Media type name">
+                <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="alert alert-danger"
+                     role="alert"></div>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary col-md-6">Save</button>
+        <div class="col-md-6">
+            <button type="submit" class="btn btn-primary btn-block">Save</button>
+        </div>
     </form>
 </div>
 
