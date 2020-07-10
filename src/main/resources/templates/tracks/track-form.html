@@ -30,6 +30,8 @@
                 <label for="trackName" class="form-label">Track name</label>
                 <input type="text" th:field="*{name}" class="form-control mb-4 col-4" id="trackName"
                        placeholder="Track name">
+                <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="alert alert-danger"
+                     role="alert"></div>
             </div>
             <div class="col-md-6">
                 <label for="album" class="form-label">Album</label>
@@ -45,6 +47,8 @@
                     <option th:each="mediatype : ${mediatypes}" th:value="${mediatype.id}" th:text="${mediatype.name}">
                     </option>
                 </select>
+                <div th:if="${#fields.hasErrors('mediaType')}" th:errors="*{mediaType}" class="alert alert-danger"
+                     role="alert"></div>
             </div>
             <div class="col-md-6">
                 <label for="genre" class="form-label">Genre</label>
@@ -53,7 +57,7 @@
                 </select>
             </div>
         </div>
-        <div class="row g-2">
+        <div class="row g-2 mt-3">
             <div class="col-md-6">
                 <label for="composer" class="form-label">Composer</label>
                 <input type="text" th:field="*{composer}" class="form-control mb-4 col-4" id="composer"
@@ -63,6 +67,8 @@
                 <label for="length" class="form-label">Track length in milliseconds</label>
                 <input type="number" th:field="*{milliseconds}" class="form-control mb-4 col-4" id="length"
                        placeholder="0">
+                <div th:if="${#fields.hasErrors('milliseconds')}" th:errors="*{milliseconds}" class="alert alert-danger"
+                     role="alert"></div>
             </div>
             <div class="col-md-3">
                 <label for="size" class="form-label">Track size in bytes</label>
@@ -73,11 +79,14 @@
         <div class="row g-2">
             <div class="col-md-6">
                 <label for="price" class="form-label">Unit price</label>
-                <input type="number" th:field="*{unitPrice}" class="form-control mb-4 col-4" id="price"
-                       placeholder="0.00">
+                <input type="number" th:field="*{unitPrice}" class="form-control mb-4 col-4" id="price">
+                <div th:if="${#fields.hasErrors('unitPrice')}" th:errors="*{unitPrice}" class="alert alert-danger"
+                     role="alert"></div>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary btn-block">Save</button>
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-primary btn-block">Save</button>
+        </div>
     </form>
 </div>
 

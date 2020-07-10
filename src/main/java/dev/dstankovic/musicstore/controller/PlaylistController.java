@@ -58,7 +58,7 @@ public class PlaylistController {
 
             return "playlists/playlist-form";
         }
-        
+
         playlistService.save(playlist);
 
         return "redirect:/playlists/list";

@@ -1,8 +1,10 @@
 package dev.dstankovic.musicstore.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,7 +16,7 @@ public class Track {
     @Column(name = "trackId", nullable = false)
     private int id;
 
-    @NotNull(message = "Track name is required")
+    @NotEmpty(message = "Track name is required")
     @Column(name = "Name", length = 200, nullable = false)
     private String name;
 
@@ -34,14 +36,14 @@ public class Track {
     @Column(name = "Composer", length = 220)
     private String composer;
 
-    @NotNull(message = "Length in milliseconds is required")
+    @Min(value = 1, message = "Length must be greater than 1")
     @Column(name = "Milliseconds", nullable = false)
     private int milliseconds;
 
     @Column(name = "Bytes")
     private int bytes;
 
-    @NotNull(message = "Unit price is required")
+    @Digits(integer = 10, fraction = 2, message = "Unit price is required")
     @Column(name = "UnitPrice", nullable = false)
     private double unitPrice;
 
@@ -59,7 +61,11 @@ public class Track {
     public Track() {
     }
 
-    public Track(String name, String composer, int milliseconds, int bytes, double unitPrice) {
+    public Track(@NotEmpty(message = "Track name is required") String name,
+                 String composer,
+                 @Min(value = 1, message = "Length must be greater than 1") int milliseconds,
+                 int bytes,
+                 @Digits(integer = 10, fraction = 2, message = "Unit price is required") @NotEmpty(message = "Unit price is required") double unitPrice) {
         this.name = name;
         this.composer = composer;
         this.milliseconds = milliseconds;
@@ -153,15 +159,6 @@ public class Track {
 
     public void setInvoiceLines(List<InvoiceLine> invoiceLines) {
         this.invoiceLines = invoiceLines;
-    }
-
-    // convenience method for bi-directional relationship
-    public void addInvoiceLine(InvoiceLine invoiceLine) {
-        if (invoiceLines == null) {
-            invoiceLines = new ArrayList<>();
-        }
-        invoiceLines.add(invoiceLine);
-        invoiceLine.setTrack(this);
     }
 
     @Override

@@ -17,6 +17,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
+@ControllerAdvice
 @RequestMapping("/tracks")
 public class TrackController {
 
@@ -46,15 +47,6 @@ public class TrackController {
         Track track = new Track();
         model.addAttribute("track", track);
 
-        List<Genre> genres = genreService.findAll();
-        model.addAttribute("genres", genres);
-
-        List<MediaType> mediaTypes = mediaTypeService.findAll();
-        model.addAttribute("mediatypes", mediaTypes);
-
-        List<Album> albums = albumService.findAll();
-        model.addAttribute("albums", albums);
-
         return "tracks/track-form";
     }
 
@@ -64,15 +56,6 @@ public class TrackController {
         Track track = trackService.findById(id);
         model.addAttribute("track", track);
 
-        List<Genre> genres = genreService.findAll();
-        model.addAttribute("genres", genres);
-
-        List<MediaType> mediaTypes = mediaTypeService.findAll();
-        model.addAttribute("mediatypes", mediaTypes);
-
-        List<Album> albums = albumService.findAll();
-        model.addAttribute("albums", albums);
-
         return "tracks/track-form";
     }
 
@@ -80,10 +63,11 @@ public class TrackController {
     public String save(@Valid @ModelAttribute("track") Track track, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
+
             return "tracks/track-form";
-        } else {
-            trackService.save(track);
         }
+
+        trackService.save(track);
 
         return "redirect:/tracks/list";
     }
@@ -94,5 +78,26 @@ public class TrackController {
         trackService.deleteById(id);
 
         return "redirect:/tracks/list";
+    }
+
+    @ModelAttribute
+    public void addGenresForDropdownList(Model model) {
+
+        List<Genre> genres = genreService.findAll();
+        model.addAttribute("genres", genres);
+    }
+
+    @ModelAttribute
+    public void addMediaTypesForDropdownList(Model model) {
+
+        List<MediaType> mediaTypes = mediaTypeService.findAll();
+        model.addAttribute("mediatypes", mediaTypes);
+    }
+
+    @ModelAttribute
+    public void addAlbumsForDropdownList(Model model) {
+
+        List<Album> albums = albumService.findAll();
+        model.addAttribute("albums", albums);
     }
 }
