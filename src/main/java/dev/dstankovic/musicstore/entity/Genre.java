@@ -1,9 +1,7 @@
 package dev.dstankovic.musicstore.entity;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.util.ArrayList;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Entity
@@ -15,8 +13,7 @@ public class Genre {
     @Column(name = "GenreId", nullable = false)
     private int id;
 
-    @NotNull(message = "Genre name is required")
-    @Size(min = 1, message = "Genre name must contain one or more characters")
+    @NotBlank(message = "Genre name is required")
     @Column(name = "Name", length = 120)
     private String name;
 
@@ -26,7 +23,7 @@ public class Genre {
     public Genre() {
     }
 
-    public Genre(String name) {
+    public Genre(@NotBlank(message = "Genre name is required") String name) {
         this.name = name;
     }
 
@@ -54,20 +51,12 @@ public class Genre {
         this.tracks = tracks;
     }
 
-    // convenience method for bi-directional relationship
-    public void addTrack(Track track) {
-        if (tracks == null) {
-            tracks = new ArrayList<>();
-        }
-        tracks.add(track);
-        track.setGenre(this);
-    }
-
     @Override
     public String toString() {
         return "Genre{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", tracks=" + tracks +
                 '}';
     }
 }

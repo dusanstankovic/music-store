@@ -50,10 +50,11 @@ public class GenreController {
     public String save(@Valid @ModelAttribute("genre") Genre genre, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
+
             return "genres/genre-form";
-        } else {
-            genreService.save(genre);
         }
+
+        genreService.save(genre);
 
         return "redirect:/genres/list";
     }
