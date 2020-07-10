@@ -78,5 +78,4 @@ public class AlbumController {
         List<Artist> artists = artistService.findAll();
         model.addAttribute("artists", artists);
     }
-
 }

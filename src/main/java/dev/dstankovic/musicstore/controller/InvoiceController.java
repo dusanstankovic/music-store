@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
+@ControllerAdvice
 @RequestMapping("/invoices")
 public class InvoiceController {
 
@@ -38,9 +39,6 @@ public class InvoiceController {
         Invoice invoice = new Invoice();
         model.addAttribute("invoice", invoice);
 
-        List<Customer> customers = customerService.findAll();
-        model.addAttribute("customers", customers);
-
         return "invoices/invoice-form";
     }
 
@@ -50,9 +48,6 @@ public class InvoiceController {
         Invoice invoice = invoiceService.findById(id);
         model.addAttribute("invoice", invoice);
 
-        List<Customer> customers = customerService.findAll();
-        model.addAttribute("customers", customers);
-
         return "invoices/invoice-form";
     }
 
@@ -60,10 +55,11 @@ public class InvoiceController {
     public String save(@Valid @ModelAttribute("invoice") Invoice invoice, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
+
             return "invoices/invoice-form";
-        } else {
-            invoiceService.save(invoice);
         }
+
+        invoiceService.save(invoice);
 
         return "redirect:/invoices/list";
     }
@@ -74,5 +70,12 @@ public class InvoiceController {
         invoiceService.deleteById(id);
 
         return "redirect:/invoices/list";
+    }
+
+    @ModelAttribute
+    public void addCustomersForDropdownList(Model model) {
+
+        List<Customer> customers = customerService.findAll();
+        model.addAttribute("customers", customers);
     }
 }

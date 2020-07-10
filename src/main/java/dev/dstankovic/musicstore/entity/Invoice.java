@@ -1,9 +1,13 @@
 package dev.dstankovic.musicstore.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,7 +24,9 @@ public class Invoice {
     @JoinColumn(name = "CustomerId")
     private Customer customer;
 
-    @NotNull(message = "Invoice date is required")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @NotNull(message = "Date is required")
+    @PastOrPresent(message = "Date must be today or in the past")
     @Column(name = "InvoiceDate", nullable = false)
     private LocalDate invoiceDate;
 
@@ -39,7 +45,7 @@ public class Invoice {
     @Column(name = "BillingPostalCode", length = 10)
     private String billingPostalCode;
 
-    @NotNull(message = "Total is required")
+    @Digits(integer = 10, fraction = 2, message = "Amount is out of range")
     @Column(name = "Total", nullable = false)
     private double total;
 
@@ -49,13 +55,15 @@ public class Invoice {
     public Invoice() {
     }
 
-    public Invoice(LocalDate invoiceDate,
+    public Invoice(int id,
+                   @PastOrPresent(message = "Date must be today or in the past") LocalDate invoiceDate,
                    String billingAddress,
                    String billingCity,
                    String billingState,
                    String billingCountry,
                    String billingPostalCode,
-                   double total) {
+                   @NotBlank(message = "Total is required") double total) {
+        this.id = id;
         this.invoiceDate = invoiceDate;
         this.billingAddress = billingAddress;
         this.billingCity = billingCity;
@@ -143,15 +151,6 @@ public class Invoice {
 
     public void setInvoiceLines(List<InvoiceLine> invoiceLines) {
         this.invoiceLines = invoiceLines;
-    }
-
-    // convenience method for bi-directional relationship
-    public void addInvoiceLine(InvoiceLine invoiceLine) {
-        if (invoiceLines == null) {
-            invoiceLines = new ArrayList<>();
-        }
-        invoiceLines.add(invoiceLine);
-        invoiceLine.setInvoice(this);
     }
 
     @Override

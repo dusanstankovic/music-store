@@ -19,27 +19,31 @@
 <p class="pb-5"></p>
 
 <div class="container">
-    <h3 class="mb-3 pb-3">Invoice details</h3>
     <form class="pb-5" action="#" th:action="@{/invoices/save}" th:object="${invoice}" method="post">
 
         <!-- add hidden form field to handle update -->
-        <input type="hidden" th:field="*{id}" />
+        <input type="hidden" th:field="*{id}"/>
 
-        <div class="row g-2">
-            <div class="col-md-4">
-                <label for="invoiceNumber" class="form-label">Invoice number</label>
-                <input type="text" th:value="*{id}" class="form-control mb-4 col-4" id="invoiceNumber" readonly>
+        <div class="row g-4">
+            <div class="col-md-12 pb-2">
+                <h1 class="display-5">Invoice # <span th:text="*{id} > 0 ? *{id} : '{new}'"></span></h1>
             </div>
-            <div class="col-md-4">
+        </div>
+        <div class="row g-2">
+            <div class="col-md-6">
                 <label for="invoiceDate" class="form-label">Invoice date</label>
                 <input type="date" th:field="*{invoiceDate}" class="form-control mb-4 col-4" id="invoiceDate">
+                <div th:if="${#fields.hasErrors('invoiceDate')}" th:errors="*{invoiceDate}" class="alert alert-danger"
+                     role="alert"></div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <label for="customer" class="form-label">Customer</label>
                 <select th:field="${invoice.customer.id}" class="form-select" id="customer">
                     <option th:each="customer : ${customers}" th:value="${customer.id}"
                             th:text="${customer.firstName + ' ' + customer.lastName}"></option>
                 </select>
+                <div th:if="${#fields.hasErrors('customer')}" th:errors="*{customer}" class="alert alert-danger"
+                     role="alert"></div>
             </div>
         </div>
         <div class="row g-2">
@@ -76,9 +80,13 @@
                 <label for="total" class="form-label">Invoice total</label>
                 <input type="number" th:field="*{total}" class="form-control mb-4 col-4" id="total"
                        placeholder="Invoice total">
+                <div th:if="${#fields.hasErrors('total')}" th:errors="*{total}" class="alert alert-danger"
+                     role="alert"></div>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary btn-block">Save</button>
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-primary btn-block">Save</button>
+        </div>
     </form>
 </div>
 
