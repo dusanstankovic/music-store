@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Music Store Demo">
+    <meta name="author" content="Dusan Stankovic">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+          integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <title>Music Store - List of Tracks</title>
+</head>
+<body>
+
+<!-- Header -->
+<div class="container-fluid" th:replace="fragments/header :: header"></div>
+<!-- Header -->
+
+<div class="container">
+
+    <div class="row mt-5"></div>
+    <div class="row mt-5"></div>
+
+    <h3 class="font-weight-light text-uppercase mb-3">Track List</h3>
+
+    <table class="table table-secondary table-striped">
+        <thead class="table-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Track name</th>
+            <th scope="col">Album title</th>
+            <th scope="col">Length (ms)</th>
+            <th scope="col">Size (bytes)</th>
+            <th scope="col">Unit price</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="track : ${tracks}"
+            th:style="${iStat.odd}? 'font-weight: bold;'"
+            th:alt-title="${iStat.even}? 'even' : 'odd'">
+            <td th:text="${track.id}"></td>
+            <td th:text="${track.name}"></td>
+            <td th:text="${track.album.title}"></td>
+            <td th:text="${track.milliseconds}"></td>
+            <td th:text="${track.bytes}"></td>
+            <td th:text="${track.unitPrice}"></td>
+            <td>
+                <!-- update button -->
+                <a th:href="@{/tracks/showFormForUpdate(trackId=${track.id})}" class="btn btn-info btn-sm">Update</a>
+                <!-- delete button -->
+                <a th:href="@{/tracks/delete(trackId=${track.id})}"
+                   class="btn btn-danger btn-sm"
+                   onclick="if (!(confirm('Are you sure you want to delete this track?'))) return false;">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <div class="row">
+        <div class="col-12">
+            <nav aria-label="List of tracks">
+                <ul th:if="${trackPage.totalPages > 0}" class="pagination pagination-sm flex-sm-wrap">
+                    <div th:each="pageNumber : ${pageNumbers}">
+                        <div th:if="${pageNumber==trackPage.number + 1}">
+                            <li class="page-item active" aria-current="page">
+                                  <span class="page-link" th:text="${pageNumber}">
+                                    #
+                                    <span class="sr-only">(current)</span>
+                                  </span>
+                            </li>
+                        </div>
+                        <div th:if="${pageNumber!=trackPage.number + 1}">
+                            <li class="page-item">
+                                <a class="page-link"
+                                   th:href="@{/tracks/list(size=${trackPage.size}, page=${pageNumber})}"
+                                   th:text="${pageNumber}">#</a>
+                            </li>
+                        </div>
+                    </div>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+
+</div>
+
+<div class="row mt-5"></div>
+<div class="row mt-5"></div>
+
+<!-- Footer -->
+<div class="container-fluid" th:replace="fragments/footer :: footer"></div>
+<!-- Footer -->
+
+</body>
+</html>

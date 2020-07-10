@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Music Store Demo">
     <meta name="author" content="Dusan Stankovic">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
           integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
     <title>Music Store - List of Albums</title>
@@ -22,12 +23,14 @@
 
     <h3 class="font-weight-light text-uppercase mb-3">Album List</h3>
 
-    <table class="table table-secondary table-striped">
+    <hr>
+
+    <table id="albumsDataTable" class="table table-secondary table-striped">
         <thead class="table-dark">
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Album title</th>
-            <th scope="col">Artist name</th>
+            <th scope="col" width="40%">Album title</th>
+            <th scope="col" width="40%">Artist name</th>
             <th scope="col">Action</th>
         </tr>
         </thead>
@@ -55,6 +58,19 @@
 <!-- Footer -->
 <div class="container-fluid" th:replace="fragments/footer :: footer"></div>
 <!-- Footer -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+</script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#albumsDataTable').DataTable();
+    } );
+</script>
 
 </body>
 </html>
