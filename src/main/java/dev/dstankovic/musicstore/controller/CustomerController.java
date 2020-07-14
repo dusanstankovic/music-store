@@ -2,14 +2,20 @@ package dev.dstankovic.musicstore.controller;
 
 import dev.dstankovic.musicstore.entity.Customer;
 import dev.dstankovic.musicstore.entity.Employee;
+import dev.dstankovic.musicstore.report.GenerateCustomersListReport;
 import dev.dstankovic.musicstore.service.CustomerService;
 import dev.dstankovic.musicstore.service.EmployeeService;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.ByteArrayInputStream;
 import java.util.List;
 
 @Controller
@@ -71,6 +77,23 @@ public class CustomerController {
         customerService.deleteById(id);
 
         return "redirect:/customers/list";
+    }
+
+    @GetMapping(value = "/report", produces = MediaType.APPLICATION_PDF_VALUE)
+    public ResponseEntity<InputStreamResource> customersReport() {
+
+        List<Customer> customers = customerService.findAll();
+
+        ByteArrayInputStream bis = GenerateCustomersListReport.customersReport(customers);
+
+        var headers = new HttpHeaders();
+        headers.add("Content-Disposition", "inline; filename=customers_report.pdf");
+
+        return ResponseEntity
+                .ok()
+                .headers(headers)
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(new InputStreamResource(bis));
     }
 
     @ModelAttribute

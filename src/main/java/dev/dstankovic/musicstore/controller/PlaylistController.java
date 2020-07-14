@@ -2,14 +2,20 @@ package dev.dstankovic.musicstore.controller;
 
 import dev.dstankovic.musicstore.entity.Playlist;
 import dev.dstankovic.musicstore.entity.Track;
+import dev.dstankovic.musicstore.report.GeneratePlaylistsReport;
 import dev.dstankovic.musicstore.service.PlaylistService;
 import dev.dstankovic.musicstore.service.TrackService;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.ByteArrayInputStream;
 import java.util.List;
 
 @Controller
@@ -70,6 +76,23 @@ public class PlaylistController {
         playlistService.deleteById(id);
 
         return "redirect:/playlists/list";
+    }
+
+    @GetMapping(value = "/report", produces = MediaType.APPLICATION_PDF_VALUE)
+    public ResponseEntity<InputStreamResource> playlistsReport() {
+
+        List<Playlist> playlists = playlistService.findAll();
+
+        ByteArrayInputStream bis = GeneratePlaylistsReport.playlistsReport(playlists);
+
+        var headers = new HttpHeaders();
+        headers.add("Content-Disposition", "inline; filename=employees_report.pdf");
+
+        return ResponseEntity
+                .ok()
+                .headers(headers)
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(new InputStreamResource(bis));
     }
 
     @ModelAttribute

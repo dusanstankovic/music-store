@@ -20,16 +20,16 @@ public class Track {
     @Column(name = "Name", length = 200, nullable = false)
     private String name;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "AlbumId")
     private Album album;
 
     @NotNull(message = "Media type is required")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MediaTypeId")
     private MediaType mediaType;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "GenreId")
     private Genre genre;
 

@@ -4,16 +4,21 @@ import dev.dstankovic.musicstore.entity.Album;
 import dev.dstankovic.musicstore.entity.Genre;
 import dev.dstankovic.musicstore.entity.MediaType;
 import dev.dstankovic.musicstore.entity.Track;
+import dev.dstankovic.musicstore.report.GenerateTracksListReport;
 import dev.dstankovic.musicstore.service.AlbumService;
 import dev.dstankovic.musicstore.service.GenreService;
 import dev.dstankovic.musicstore.service.MediaTypeService;
 import dev.dstankovic.musicstore.service.TrackService;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.ByteArrayInputStream;
 import java.util.List;
 
 @Controller
@@ -78,6 +83,23 @@ public class TrackController {
         trackService.deleteById(id);
 
         return "redirect:/tracks/list";
+    }
+
+    @GetMapping(value = "/report", produces = org.springframework.http.MediaType.APPLICATION_PDF_VALUE)
+    public ResponseEntity<InputStreamResource> tracksReport() {
+
+        List<Track> tracks = trackService.findAll().subList(0, 50);
+
+        ByteArrayInputStream bis = GenerateTracksListReport.tracksReport(tracks);
+
+        var headers = new HttpHeaders();
+        headers.add("Content-Disposition", "inline; filename=tracks_report.pdf");
+
+        return ResponseEntity
+                .ok()
+                .headers(headers)
+                .contentType(org.springframework.http.MediaType.APPLICATION_PDF)
+                .body(new InputStreamResource(bis));
     }
 
     @ModelAttribute
