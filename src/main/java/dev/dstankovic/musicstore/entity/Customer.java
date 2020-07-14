@@ -7,7 +7,7 @@ import javax.validation.constraints.Pattern;
 import java.util.List;
 
 @Entity
-@Table(name = "customer", schema = "chinook")
+@Table(name = "Customer", schema = "Chinook")
 public class Customer {
 
     @Id

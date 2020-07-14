@@ -5,7 +5,7 @@ import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Entity
-@Table(name = "artist", schema = "chinook")
+@Table(name = "Artist", schema = "Chinook")
 public class Artist {
 
     @Id

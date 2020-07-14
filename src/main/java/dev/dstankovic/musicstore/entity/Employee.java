@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table(name = "employee", schema = "chinook")
+@Table(name = "Employee", schema = "Chinook")
 public class Employee {
 
     @Id

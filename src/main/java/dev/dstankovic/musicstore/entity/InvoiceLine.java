@@ -3,7 +3,7 @@ package dev.dstankovic.musicstore.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "invoiceline", schema = "chinook")
+@Table(name = "InvoiceLine", schema = "Chinook")
 public class InvoiceLine {
 
     @Id

@@ -4,7 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-@Table(name = "mediatype", schema = "chinook")
+@Table(name = "MediaType", schema = "Chinook")
 public class MediaType {
 
     @Id
