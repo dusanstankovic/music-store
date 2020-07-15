@@ -88,7 +88,7 @@ public class TrackController {
     @GetMapping(value = "/report", produces = org.springframework.http.MediaType.APPLICATION_PDF_VALUE)
     public ResponseEntity<InputStreamResource> tracksReport() {
 
-        List<Track> tracks = trackService.findAll().subList(0, 50);
+        List<Track> tracks = trackService.findAll();
 
         ByteArrayInputStream bis = GenerateTracksListReport.tracksReport(tracks);
 

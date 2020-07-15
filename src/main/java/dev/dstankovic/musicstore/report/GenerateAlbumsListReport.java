@@ -24,9 +24,9 @@ public class GenerateAlbumsListReport {
 
         try {
 
-            PdfPTable table = new PdfPTable(2);
+            PdfPTable table = new PdfPTable(3);
             table.setWidthPercentage(100);
-            table.setWidths(new int[]{1, 3});
+            table.setWidths(new int[]{1, 3, 3});
 
             Font headFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 10);
 
@@ -37,7 +37,7 @@ public class GenerateAlbumsListReport {
             cell.setPadding(10);
             cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-            cell.setColspan(2);
+            cell.setColspan(3);
             table.addCell(cell);
 
             addTableHeader(table);
@@ -50,6 +50,12 @@ public class GenerateAlbumsListReport {
                 table.addCell(cell);
 
                 cell = new PdfPCell(new Phrase(album.getTitle()));
+                cell.setPaddingLeft(5);
+                cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+                table.addCell(cell);
+
+                cell = new PdfPCell(new Phrase(album.getArtist().getName()));
                 cell.setPaddingLeft(5);
                 cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 cell.setHorizontalAlignment(Element.ALIGN_LEFT);
@@ -74,7 +80,7 @@ public class GenerateAlbumsListReport {
     }
 
     private static void addTableHeader(PdfPTable table) {
-        Stream.of("ID", "Album Title")
+        Stream.of("ID", "Album Title", "Artist")
                 .forEach(columnTitle -> {
                     PdfPCell header = new PdfPCell();
                     header.setBackgroundColor(BaseColor.LIGHT_GRAY);

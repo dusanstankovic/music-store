@@ -19,7 +19,7 @@ public class GenerateTracksListReport {
 
     public static ByteArrayInputStream tracksReport(List<Track> tracks) {
 
-        Document document = new Document(PageSize.A4, 20, 20, 20, 20);
+        Document document = new Document(PageSize.A4.rotate());
         ByteArrayOutputStream out = new ByteArrayOutputStream();
 
         try {
@@ -55,18 +55,18 @@ public class GenerateTracksListReport {
                 cell.setHorizontalAlignment(Element.ALIGN_LEFT);
                 table.addCell(cell);
 
-                cell = new PdfPCell(new Phrase(String.valueOf(track.getAlbum())));
+                cell = new PdfPCell(new Phrase(track.getAlbum().getTitle()));
                 cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 cell.setHorizontalAlignment(Element.ALIGN_LEFT);
                 cell.setPaddingRight(5);
                 table.addCell(cell);
 
-                cell = new PdfPCell(new Phrase(track.getGenre().toString()));
+                cell = new PdfPCell(new Phrase(track.getGenre().getName()));
                 cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 cell.setHorizontalAlignment(Element.ALIGN_LEFT);
                 table.addCell(cell);
 
-                cell = new PdfPCell(new Phrase(String.valueOf(track.getComposer())));
+                cell = new PdfPCell(new Phrase(track.getComposer()));
                 cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 cell.setHorizontalAlignment(Element.ALIGN_LEFT);
                 cell.setPaddingRight(5);

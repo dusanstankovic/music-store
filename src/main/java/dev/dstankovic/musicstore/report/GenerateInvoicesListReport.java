@@ -19,7 +19,7 @@ public class GenerateInvoicesListReport {
 
     public static ByteArrayInputStream invoicesReport(List<Invoice> invoices) {
 
-        Document document = new Document();
+        Document document = new Document(PageSize.A4.rotate());
         ByteArrayOutputStream out = new ByteArrayOutputStream();
 
         try {
@@ -57,13 +57,13 @@ public class GenerateInvoicesListReport {
 
                 cell = new PdfPCell(new Phrase(String.valueOf(invoice.getInvoiceDate())));
                 cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
                 cell.setPaddingRight(5);
                 table.addCell(cell);
 
                 cell = new PdfPCell(new Phrase(String.valueOf(invoice.getTotal())));
                 cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
                 table.addCell(cell);
 
             }

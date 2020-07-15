@@ -19,21 +19,21 @@ public class GenerateEmployeesListReport {
 
     public static ByteArrayInputStream employeesReport(List<Employee> employees) {
 
-        Document document = new Document();
+        Document document = new Document(PageSize.A4.rotate());
         ByteArrayOutputStream out = new ByteArrayOutputStream();
 
         try {
 
             PdfPTable table = new PdfPTable(5);
             table.setWidthPercentage(100);
-            table.setWidths(new int[]{1, 3, 3, 3, 3});
+            table.setWidths(new int[]{1, 2, 2, 3, 3});
 
             Font headFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 10);
 
             PdfPCell cell;
             Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 26, BaseColor.BLACK);
 
-            cell = new PdfPCell(new Phrase("Employee List", font));
+            cell = new PdfPCell(new Phrase("Employees List", font));
             cell.setPadding(10);
             cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -55,7 +55,7 @@ public class GenerateEmployeesListReport {
                 cell.setHorizontalAlignment(Element.ALIGN_LEFT);
                 table.addCell(cell);
 
-                cell = new PdfPCell(new Phrase(String.valueOf(employee.getLastName())));
+                cell = new PdfPCell(new Phrase(employee.getLastName()));
                 cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 cell.setHorizontalAlignment(Element.ALIGN_LEFT);
                 cell.setPaddingRight(5);
@@ -66,7 +66,7 @@ public class GenerateEmployeesListReport {
                 cell.setHorizontalAlignment(Element.ALIGN_LEFT);
                 table.addCell(cell);
 
-                cell = new PdfPCell(new Phrase(String.valueOf(employee.getEmail())));
+                cell = new PdfPCell(new Phrase(employee.getEmail()));
                 cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 cell.setHorizontalAlignment(Element.ALIGN_LEFT);
                 cell.setPaddingRight(5);

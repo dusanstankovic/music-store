@@ -19,15 +19,15 @@ public class GenerateCustomersListReport {
 
     public static ByteArrayInputStream customersReport(List<Customer> customers) {
 
-        Document document = new Document();
+        Document document = new Document(PageSize.A4.rotate());
         ByteArrayOutputStream out = new ByteArrayOutputStream();
 
         try {
 
 
-            PdfPTable table = new PdfPTable(5);
+            PdfPTable table = new PdfPTable(6);
             table.setWidthPercentage(100);
-            table.setWidths(new int[]{1, 3, 3, 3, 3});
+            table.setWidths(new int[]{1, 2, 2, 3, 3, 3});
 
             Font headFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 10);
 
@@ -38,7 +38,7 @@ public class GenerateCustomersListReport {
             cell.setPadding(10);
             cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-            cell.setColspan(5);
+            cell.setColspan(6);
             table.addCell(cell);
 
             addTableHeader(table);
@@ -67,6 +67,11 @@ public class GenerateCustomersListReport {
                 cell.setHorizontalAlignment(Element.ALIGN_LEFT);
                 table.addCell(cell);
 
+                cell = new PdfPCell(new Phrase(customer.getEmployee().getFirstName() + " " + customer.getEmployee().getLastName()));
+                cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+                table.addCell(cell);
+
                 cell = new PdfPCell(new Phrase(customer.getEmail()));
                 cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 cell.setHorizontalAlignment(Element.ALIGN_LEFT);
@@ -91,7 +96,7 @@ public class GenerateCustomersListReport {
     }
 
     private static void addTableHeader(PdfPTable table) {
-        Stream.of("ID", "First Name", "Last Name", "Company", "Email")
+        Stream.of("ID", "First Name", "Last Name", "Company", "Customer Representative", "Email")
                 .forEach(columnTitle -> {
                     PdfPCell header = new PdfPCell();
                     header.setBackgroundColor(BaseColor.LIGHT_GRAY);
