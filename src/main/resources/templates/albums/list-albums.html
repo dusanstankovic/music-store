@@ -8,6 +8,16 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
           integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/baade9764e.js" crossorigin="anonymous"></script>
+    <style>
+        .fa-trash-alt {
+            color: dimgray;
+        }
+
+        .fa-trash-alt:hover {
+            color: red;
+        }
+    </style>
     <title>Music Store - List of Albums</title>
 </head>
 <body>
@@ -31,21 +41,20 @@
             <th scope="col">#</th>
             <th scope="col" width="40%">Album title</th>
             <th scope="col" width="40%">Artist name</th>
-            <th scope="col">Action</th>
+            <th scope="col" class="text-md-center">Action</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="album : ${albums}">
-            <td th:text="${album.id}"></td>
+            <td><a th:text="${album.id}" th:href="@{/albums/showFormForUpdate(albumId=${album.id})}"
+                   class="text-decoration-none"></a></td>
             <td th:text="${album.title}"></td>
             <td th:text="${album.artist.name}"></td>
-            <td>
-                <!-- update button -->
-                <a th:href="@{/albums/showFormForUpdate(albumId=${album.id})}" class="btn btn-info btn-sm">Update</a>
-                <!-- delete button -->
+            <td class="text-md-center">
                 <a th:href="@{/albums/delete(albumId=${album.id})}"
-                   class="btn btn-danger btn-sm"
-                   onclick="if (!(confirm('Are you sure you want to delete this album?'))) return false;">Delete</a>
+                   onclick="if (!(confirm('Are you sure you want to delete this album?'))) return false;">
+                    <i class="far fa-trash-alt" data-toggle="tooltip" data-placement="right" title="Delete Album"></i>
+                </a>
             </td>
         </tr>
         </tbody>

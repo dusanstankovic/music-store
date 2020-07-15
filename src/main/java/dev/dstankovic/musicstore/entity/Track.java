@@ -21,6 +21,7 @@ public class Track {
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @NotNull(message = "Album is required")
     @JoinColumn(name = "AlbumId")
     private Album album;
 

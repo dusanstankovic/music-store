@@ -39,16 +39,20 @@
                      role="alert"></div>
             </div>
             <div class="col-md-6">
-                <label for="album" class="form-label">Album</label>
+                <label for="album" class="form-label">Album <span class="text-danger">*</span></label>
                 <select th:field="${track.album.id}" class="form-select" id="album">
+                    <option value="0" disabled>Select...</option>
                     <option th:each="album : ${albums}" th:value="${album.id}" th:text="${album.title}"></option>
                 </select>
+                <div th:if="${#fields.hasErrors('album')}" th:errors="*{album.id}" class="alert alert-danger"
+                     role="alert"></div>
             </div>
         </div>
         <div class="row g-2">
             <div class="col-md-6">
                 <label for="mediaType" class="form-label">Media type <span class="text-danger">*</span></label>
                 <select th:field="${track.mediaType.id}" class="form-select" id="mediaType">
+                    <option value="0" disabled>Select...</option>
                     <option th:each="mediatype : ${mediatypes}" th:value="${mediatype.id}" th:text="${mediatype.name}">
                     </option>
                 </select>
@@ -58,6 +62,7 @@
             <div class="col-md-6">
                 <label for="genre" class="form-label">Genre</label>
                 <select th:field="${track.genre.id}" class="form-select" id="genre">
+                    <option value="0" disabled>Select...</option>
                     <option th:each="genre : ${genres}" th:value="${genre.id}" th:text="${genre.name}"></option>
                 </select>
             </div>
@@ -69,7 +74,7 @@
                        placeholder="Composer name">
             </div>
             <div class="col-md-3">
-                <label for="length" class="form-label">Track length in milliseconds</label>
+                <label for="length" class="form-label">Track length in milliseconds <span class="text-danger">*</span></label>
                 <input type="number" th:field="*{milliseconds}" class="form-control mb-4 col-4" id="length"
                        placeholder="0">
                 <div th:if="${#fields.hasErrors('milliseconds')}" th:errors="*{milliseconds}" class="alert alert-danger"
