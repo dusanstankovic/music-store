@@ -30,14 +30,15 @@
             </div>
         </div>
         <div class="row g-2">
+            <p class="form-text">Fields marked with an asterisk (<span class="text-danger">*</span>) are required.</p>
             <div class="col-md-6">
-                <label for="invoiceDate" class="form-label">Invoice date</label>
+                <label for="invoiceDate" class="form-label">Invoice date <span class="text-danger">*</span></label>
                 <input type="date" th:field="*{invoiceDate}" class="form-control mb-4 col-4" id="invoiceDate">
                 <div th:if="${#fields.hasErrors('invoiceDate')}" th:errors="*{invoiceDate}" class="alert alert-danger"
                      role="alert"></div>
             </div>
             <div class="col-md-6">
-                <label for="customer" class="form-label">Customer</label>
+                <label for="customer" class="form-label">Customer <span class="text-danger">*</span></label>
                 <select th:field="${invoice.customer.id}" class="form-select" id="customer">
                     <option th:each="customer : ${customers}" th:value="${customer.id}"
                             th:text="${customer.firstName + ' ' + customer.lastName}"></option>

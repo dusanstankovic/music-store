@@ -26,15 +26,16 @@
         <input type="hidden" th:field="*{id}"/>
 
         <div class="row g-2">
+            <p class="form-text">Fields marked with an asterisk (<span class="text-danger">*</span>) are required.</p>
             <div class="col-md-6">
-                <label for="firstName" class="form-label">First name</label>
+                <label for="firstName" class="form-label">First name <span class="text-danger">*</span></label>
                 <input type="text" th:field="*{firstName}" class="form-control mb-4 col-4" id="firstName"
                        placeholder="First name">
                 <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="alert alert-danger"
                      role="alert"></div>
             </div>
             <div class="col-md-6">
-                <label for="lastName" class="form-label">First name</label>
+                <label for="lastName" class="form-label">Last name <span class="text-danger">*</span></label>
                 <input type="text" th:field="*{lastName}" class="form-control mb-4 col-4" id="lastName"
                        placeholder="Last name">
                 <div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="alert alert-danger"
