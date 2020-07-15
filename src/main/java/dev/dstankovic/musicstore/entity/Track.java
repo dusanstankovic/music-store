@@ -1,5 +1,8 @@
 package dev.dstankovic.musicstore.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import dev.dstankovic.musicstore.util.Views;
+
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
@@ -14,15 +17,18 @@ public class Track {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "trackId", nullable = false)
+    @JsonView(Views.External.class)
     private int id;
 
     @NotEmpty(message = "Track name is required")
     @Column(name = "Name", length = 200, nullable = false)
+    @JsonView(Views.External.class)
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @NotNull(message = "Album is required")
     @JoinColumn(name = "AlbumId")
+    @JsonView(Views.External.class)
     private Album album;
 
     @NotNull(message = "Media type is required")
@@ -46,6 +52,7 @@ public class Track {
 
     @Digits(integer = 10, fraction = 2, message = "Unit price is required")
     @Column(name = "UnitPrice", nullable = false)
+    @JsonView(Views.External.class)
     private double unitPrice;
 
     @ManyToMany(fetch = FetchType.LAZY,
@@ -66,7 +73,7 @@ public class Track {
                  String composer,
                  @Min(value = 1, message = "Length must be greater than 1") int milliseconds,
                  int bytes,
-                 @Digits(integer = 10, fraction = 2, message = "Unit price is required") @NotEmpty(message = "Unit price is required") double unitPrice) {
+                 @Digits(integer = 10, fraction = 2, message = "Unit price is required") double unitPrice) {
         this.name = name;
         this.composer = composer;
         this.milliseconds = milliseconds;

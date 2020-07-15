@@ -61,7 +61,7 @@ public class GenerateTracksListReport {
                 cell.setPaddingRight(5);
                 table.addCell(cell);
 
-                cell = new PdfPCell(new Phrase(track.getGenre().getName()));
+                cell = new PdfPCell(new Phrase(track.getGenre() != null ? track.getGenre().getName() : ""));
                 cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 cell.setHorizontalAlignment(Element.ALIGN_LEFT);
                 table.addCell(cell);

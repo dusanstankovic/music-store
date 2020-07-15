@@ -1,5 +1,8 @@
 package dev.dstankovic.musicstore.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import dev.dstankovic.musicstore.util.Views;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -16,6 +19,7 @@ public class Album {
 
     @NotBlank(message = "Album title is required")
     @Column(name = "Title", length = 160, nullable = false)
+    @JsonView(Views.External.class)
     private String title;
 
     @NotNull(message = "Artist is required")

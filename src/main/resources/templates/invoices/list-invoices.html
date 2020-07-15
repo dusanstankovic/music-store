@@ -39,6 +39,7 @@
         <thead class="table-dark">
         <tr>
             <th scope="col">#</th>
+            <th scope="col">Customer name</th>
             <th scope="col">Invoice date</th>
             <th scope="col">Total</th>
             <th scope="col" class="text-md-center">Action</th>
@@ -47,7 +48,9 @@
         <tbody>
         <tr th:each="invoice : ${invoices}">
             <td><a th:text="${invoice.id}" th:href="@{/invoices/showFormForUpdate(invoiceId=${invoice.id})}"
-                   class="text-decoration-none"></a></td>
+                   class="text-decoration-none"></a>
+            </td>
+            <td th:text="${invoice.customer.firstName + ' ' + invoice.customer.lastName}"></td>
             <td th:text="${invoice.invoiceDate}"></td>
             <td th:text="${invoice.total}"></td>
             <td class="text-md-center">

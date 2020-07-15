@@ -49,7 +49,7 @@ public class GenerateInvoicesListReport {
                 cell.setHorizontalAlignment(Element.ALIGN_CENTER);
                 table.addCell(cell);
 
-                cell = new PdfPCell(new Phrase(invoice.getCustomer().getFirstName() + " " + invoice.getCustomer().getLastName()));
+                cell = new PdfPCell(new Phrase(invoice.getCustomer() != null ? invoice.getCustomer().getFirstName() + " " + invoice.getCustomer().getLastName() : ""));
                 cell.setPaddingLeft(5);
                 cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 cell.setHorizontalAlignment(Element.ALIGN_LEFT);
